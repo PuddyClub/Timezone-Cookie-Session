@@ -1,0 +1,25 @@
+{
+  "name": "@tinypudding/timezone-lib",
+  "version": "1.0.0",
+  "description": "Codes to help work with Timezone using the moment-timezone module.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TinyPudding/TImezone-Lib.git"
+  },
+  "keywords": [
+    "timezone"
+  ],
+  "author": "Yasmin Seidel (JasminDreasond)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TinyPudding/TImezone-Lib/issues"
+  },
+  "homepage": "https://github.com/TinyPudding/TImezone-Lib#readme",
+  "dependencies": {
+    "moment-timezone": "^0.5.32"
+  }
+}

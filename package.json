@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TinyPudding/TImezone-Lib.git"
+    "url": "git+https://github.com/TinyPudding/Timezone-Lib.git"
   },
   "keywords": [
     "timezone"
@@ -16,9 +16,9 @@
   "author": "Yasmin Seidel (JasminDreasond)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TinyPudding/TImezone-Lib/issues"
+    "url": "https://github.com/TinyPudding/Timezone-Lib/issues"
   },
-  "homepage": "https://github.com/TinyPudding/TImezone-Lib#readme",
+  "homepage": "https://github.com/TinyPudding/Timezone-Lib#readme",
   "dependencies": {
     "moment-timezone": "^0.5.32"
   }

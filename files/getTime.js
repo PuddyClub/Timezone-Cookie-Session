@@ -1,4 +1,4 @@
-module.exports = function (utcTime, timezone = 'Universal', timeFormat = 'dddd, MMMM Do YYYY, ') {
+module.exports = function (utcTime, timezone = 'Universal', allowSecondary = true, timeFormat = 'dddd, MMMM Do YYYY, ') {
 
     /* 
         utcTime: The original time stored in a UTC Value
@@ -8,21 +8,24 @@ module.exports = function (utcTime, timezone = 'Universal', timeFormat = 'dddd, 
     // Prepare Result
     const result = { vanilla: utcTime };
 
+    // Exist Secondary
+    const existSecondary = (allowSecondary && this.cfgSecondary);
+
     // Convert Clock Data
-    result.moment = this.module.tz(result.vanilla, timezone);
-    result.utc = result.moment.clone();
+    result.time = this.module.tz(result.vanilla, timezone);
+    result.utc = result.time.clone();
     result.utcUnix = result.utc.unix();
 
     // Set Primary Timezone
-    result.secondary_moment = result.moment.clone().tz(this.cfgSecondary.actived);
-    result.moment.tz(this.cfg.actived);
+    if (existSecondary) { result.secondary_time = result.time.clone().tz(this.cfgSecondary.actived); }
+    result.time.tz(this.cfg.actived);
 
     // Format
     const timeFormatResult = `${timeFormat}${this.clockCfg.format2}`;
-    result.time = result.moment.format(timeFormatResult);
-    result.secondary_time = result.secondary_moment.format(timeFormatResult);
+    result.time = result.time.format(timeFormatResult);
+    if (existSecondary) { result.secondary_time = result.secondary_time.format(timeFormatResult); }
 
     // Complete
-    return;
+    return result;
 
 };

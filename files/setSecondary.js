@@ -1,5 +1,9 @@
 module.exports = function (req) {
 
+    // Prepare Main Variable
+    this.cfgSecondary = {};
+
+    // Set Values
     if (typeof req.session[this.sessionVars.secondary_timezone] !== "string" || !req.session[this.sessionVars.secondary_timezone]) {
         req.session[this.sessionVars.secondary_timezone] = 'auto';
     }

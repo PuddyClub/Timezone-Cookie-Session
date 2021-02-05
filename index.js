@@ -29,10 +29,10 @@ class timezone_module {
     getUTCValue() { return this.utcValue; }
 
     // Set Cookie
-    setCookie() { return require('./files/setCookie').apply(this, arguments); }
+    setCookie() { return require('./files/setCookie'); }
 
     // Get Client Web
-    getClientWeb() { return require('./files/clientWeb').toString(); }
+    getClientWeb() { return require('./files/clientWeb').apply(this, arguments); }
 
     // Get Moment Module
     getMoment() { return this.module; }

@@ -52,18 +52,18 @@ module.exports = function (body) {
         dateResult.tz(this.utcValue);
 
         // Complete
-        return;
+        return dateResult.format();
 
     }
 
-    // to String
-    else if (tinyCfg.type === "toString") {
+    // to Date
+    else if (tinyCfg.type === "toDate") {
 
         // Convert to UTC
         dateResult.tz(this.utcValue);
 
         // Complete
-        return;
+        return dateResult.toDate();
 
     }
 

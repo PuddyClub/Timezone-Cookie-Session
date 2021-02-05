@@ -24,12 +24,13 @@ module.exports = function (data = {}) {
     }
 
     // Rest Set
-    tinyclock.secondary_timezone = `{{global.timezones.secondary_actived}}`;
+    tinyclock.secondary_timezone = `{{secondaryTimezone}}`;
     tinyclock.formatDate = `dddd, MMMM Do YYYY`;
-    tinyclock.formatTime = `{{global.timezones.clock.format}}`;
-    tinyclock.is24hours = null;
-    tinyclock.mainTimezone = `{{global.timezones.mainTimezone}}`;
-    if (`{{type24hoursOn}}` === "true") { tinyclock.is24hours = true; } else { tinyclock.is24hours = false; }
+    tinyclock.formatTime = `{{clockFormat}}`;
+    tinyclock.formatTime = `{{clockFormat2}}`;
+    tinyclock.mainTimezone = `{{mainTimezone}}`;
+    tinyclock.is24hours = false;
+    if (`{{type24hoursOn}}` === "true") { tinyclock.is24hours = true; }
 
     // Complete
     return tinyclock;

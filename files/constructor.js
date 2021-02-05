@@ -5,6 +5,9 @@ module.exports = function (req, data) {
 
     const tinyCfg = _.defaultsDeep({}, data, {
 
+        // Module Language
+        locale: 'en',
+
         // Main Values
         mainTimezone: 'Universal',
 
@@ -32,6 +35,9 @@ module.exports = function (req, data) {
 
     // Prepare Module
     this.module = require('moment-timezone');
+
+    // Set Language
+    this.module.locale(tinyCfg.locale);
 
     // Time Now
     this.now = this.module('Universal');

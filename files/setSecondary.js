@@ -1,15 +1,15 @@
 module.exports = function (req) {
 
-    if (typeof req.session.secondary_timezone !== "string" || !req.session.secondary_timezone) {
-        req.session.secondary_timezone = 'auto';
+    if (typeof req.session[this.sessionVars.secondary_timezone] !== "string" || !req.session[this.sessionVars.secondary_timezone]) {
+        req.session[this.sessionVars.secondary_timezone] = 'auto';
     }
 
-    if (req.session.secondary_timezone === "auto") {
+    if (req.session[this.sessionVars.secondary_timezone] === "auto") {
         this.cfgSecondary.auto = true;
         this.cfgSecondary.actived = this.main;
     } else {
         this.cfgSecondary.auto = false;
-        this.cfgSecondary.actived = req.session.secondary_timezone;
+        this.cfgSecondary.actived = req.session[this.sessionVars.secondary_timezone];
     }
 
     if (this.cfgSecondary.actived) {
@@ -19,7 +19,7 @@ module.exports = function (req) {
     }
 
     // Get List
-    this.cfgSecondary.list = require('./selectList/timezone')(req.session.secondary_timezone);
+    this.cfgSecondary.list = require('./selectList/timezone')(req.session[this.sessionVars.secondary_timezone]);
 
     // Complete
     return;

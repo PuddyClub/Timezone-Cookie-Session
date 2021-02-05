@@ -4,11 +4,25 @@ module.exports = function (req, data) {
     const _ = require('lodash');
 
     const tinyCfg = _.defaultsDeep({}, data, {
-        mainTimezone: 'Universal'
+
+        // Main Values
+        mainTimezone: 'Universal',
+
+        // Session Vars
+        sessionVars: {
+            primary_timezone: 'primary_timezone',
+            secondary_timezone: 'secondary_timezone',
+            timezone: 'timezone',
+            clock24: 'clock24'
+        }
+    
     });
 
     // Main Timezone
     this.main = tinyCfg.mainTimezone;
+
+    // Session vars
+    this.sessionVars = tinyCfg.sessionVars;
 
     // Prepare Module
     this.module = require('moment-timezone');
@@ -18,20 +32,20 @@ module.exports = function (req, data) {
 
     // Set Timezone
     this.cfg = {};
-    if (typeof req.session.primary_timezone !== "string" || !req.session.primary_timezone) {
-        req.session.primary_timezone = 'auto';
+    if (typeof req.session[this.sessionVars.primary_timezone] !== "string" || !req.session[this.sessionVars.primary_timezone]) {
+        req.session[this.sessionVars.primary_timezone] = 'auto';
     }
 
-    if (typeof req.session.primary_timezone !== "string" || !req.session.primary_timezone) {
-        req.session.primary_timezone = 'auto';
+    if (typeof req.session[this.sessionVars.primary_timezone] !== "string" || !req.session[this.sessionVars.primary_timezone]) {
+        req.session[this.sessionVars.primary_timezone] = 'auto';
     }
 
-    if (req.session.primary_timezone === "auto") {
+    if (req.session[this.sessionVars.primary_timezone] === "auto") {
         this.cfg.auto = true;
-        this.cfg.actived = req.session.timezone;
+        this.cfg.actived = req.session[this.sessionVars.timezone];
     } else {
         this.cfg.auto = false;
-        this.cfg.actived = req.session.primary_timezone;
+        this.cfg.actived = req.session[this.sessionVars.primary_timezone];
     }
 
     if (this.cfg.actived) {
@@ -41,16 +55,16 @@ module.exports = function (req, data) {
     }
 
     // Get List
-    this.cfg.list = require('./selectList/timezone')(req.session.primary_timezone);
+    this.cfg.list = require('./selectList/timezone')(req.session[this.sessionVars.primary_timezone]);
 
     // Prepare Clock
-    if (typeof req.session.clock24 !== "string" || !req.session.clock24 || (req.session.clock24 !== "on" && req.session.clock24 !== "off")) {
-        req.session.clock24 = 'off';
+    if (typeof req.session[this.sessionVars.clock24] !== "string" || !req.session[this.sessionVars.clock24] || (req.session[this.sessionVars.clock24] !== "on" && req.session[this.sessionVars.clock24] !== "off")) {
+        req.session[this.sessionVars.clock24] = 'off';
     }
 
     this.clockCfg = {
-        typeOption: setConfig.clock24(req.session.clock24),
-        type24hours: req.session.clock24
+        typeOption: setConfig.clock24(req.session[this.sessionVars.clock24]),
+        type24hours: req.session[this.sessionVars.clock24]
     };
 
     if (this.clockCfg.type24hours === "off") {

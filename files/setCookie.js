@@ -18,7 +18,7 @@ module.exports = async function (req, res, csrfToken = {
             req.body.value = req.body.value.substring(0, 100);
 
             if (this.module.tz.zone(req.body.value)) {
-                req.session.timezone = req.body.value;
+                req.session[this.sessionVars.timezone] = req.body.value;
             }
 
         }
@@ -29,9 +29,9 @@ module.exports = async function (req, res, csrfToken = {
             req.body.value = req.body.value.substring(0, 100);
 
             if (this.module.tz.zone(req.body.value)) {
-                req.session.manual_timezone = req.body.value;
+                req.session[this.sessionVars.primary_timezone] = req.body.value;
             } else {
-                req.session.manual_timezone = 'auto';
+                req.session[this.sessionVars.primary_timezone] = 'auto';
             }
 
         }
@@ -42,9 +42,9 @@ module.exports = async function (req, res, csrfToken = {
             req.body.value = req.body.value.substring(0, 100);
 
             if (this.module.tz.zone(req.body.value)) {
-                req.session.secondary_timezone = req.body.value;
+                req.session[this.sessionVars.secondary_timezone] = req.body.value;
             } else {
-                req.session.secondary_timezone = 'auto';
+                req.session[this.sessionVars.secondary_timezone] = 'auto';
             }
 
         }
@@ -52,7 +52,7 @@ module.exports = async function (req, res, csrfToken = {
         // 24 Clock
         else if (req.body.type === "clock24") {
             if (req.body.value === "on" || req.body.value === "off") {
-                req.session.clock24 = req.body.value;
+                req.session[this.sessionVars.clock24] = req.body.value;
             }
         }
 

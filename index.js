@@ -19,7 +19,7 @@ class timezone_module {
     getClockCfg() { return this.clockCfg; }
 
     // Get Clock Config
-    getTime() { return require('./files/getTime').apply(this, arguments); }
+    convertUTC() { return require('./files/convertUTC').apply(this, arguments); }
 
     // Set Cookie
     setCookie() { return require('./files/setCookie').apply(this, arguments); }

@@ -5,7 +5,8 @@ module.exports = function (body) {
     const tinyCfg = _.defaultsDeep({}, body, {
         date: '',
         time: '',
-        timezone: 'Universal'
+        timezone: 'Universal',
+        type: 'toDate'
     });
 
     // Prepare Result
@@ -34,6 +35,6 @@ module.exports = function (body) {
     }
 
     // Complete
-    return dateResult.toDate();
+    return dateResult[tinyCfg.type]();
 
 };

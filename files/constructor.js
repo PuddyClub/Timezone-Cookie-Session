@@ -2,7 +2,6 @@ module.exports = function (req, data) {
 
     // Lodash Module
     const _ = require('lodash');
-
     const tinyCfg = _.defaultsDeep({}, data, {
 
         // Module Language

@@ -3,7 +3,7 @@ module.exports = function (body) {
     // Lodash Module
     const _ = require('lodash');
     const tinyCfg = _.defaultsDeep({}, body, {
-        
+
         // Date Value
         date: '',
 
@@ -36,8 +36,8 @@ module.exports = function (body) {
         dateResult.set('minute', newDate.minute());
         dateResult.set('second', newDate.second());
 
-    } 
-    
+    }
+
     // Fail
     catch (err) {
         dateResult = this.module();
@@ -46,20 +46,28 @@ module.exports = function (body) {
     // Complete
 
     // Format
-    if(tinyCfg.type === "format") {
-        
+    if (tinyCfg.type === "format") {
+
+        // Convert to UTC
         dateResult.tz(this.utcValue);
 
-    } 
-    
-    // to String
-    else if(tinyCfg.type === "toString") {
-        
-    } 
-    
-    // Other
-    else {
-        return dateResult[tinyCfg.type]();
+        // Complete
+        return;
+
     }
+
+    // to String
+    else if (tinyCfg.type === "toString") {
+
+        // Convert to UTC
+        dateResult.tz(this.utcValue);
+
+        // Complete
+        return;
+
+    }
+
+    // Other
+    else { return dateResult[tinyCfg.type](); }
 
 };

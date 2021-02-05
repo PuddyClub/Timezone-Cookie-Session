@@ -1,3 +1,3 @@
 // Module
-const moment = require('../index');
+const createTimezoneSession = require('../index');
 

@@ -22,5 +22,10 @@
   "dependencies": {
     "lodash": "^4.17.20",
     "moment-timezone": "^0.5.32"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1"
   }
 }

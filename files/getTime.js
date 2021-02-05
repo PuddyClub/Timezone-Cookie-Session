@@ -1,4 +1,4 @@
-module.exports = function (utcTime, timezone) {
+module.exports = function (utcTime, timezone = 'Universal', timeFormat = 'dddd, MMMM Do YYYY, ') {
 
     /* 
         utcTime: The original time stored in a UTC Value
@@ -18,9 +18,9 @@ module.exports = function (utcTime, timezone) {
     result.moment.tz(this.cfg.actived);
 
     // Format
-    let timeFormat = `dddd, MMMM Do YYYY, ${defaultPage.timezones.clock.format2}`;
-    result.time = result.moment.format(timeFormat);
-    result.secondary_time = result.secondary_moment.format(timeFormat);
+    const timeFormatResult = `${timeFormat}${this.clockCfg.format2}`;
+    result.time = result.moment.format(timeFormatResult);
+    result.secondary_time = result.secondary_moment.format(timeFormatResult);
 
     // Complete
     return;

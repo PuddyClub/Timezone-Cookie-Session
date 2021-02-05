@@ -18,6 +18,9 @@ class timezone_module {
     // Get Clock Config
     getClockCfg() { return this.clockCfg; }
 
+    // Get Clock Config
+    getTime() { return require('./files/getTime').apply(this, arguments); }
+
     // Set Cookie
     setCookie() { return require('./files/setCookie').apply(this, arguments); }
 

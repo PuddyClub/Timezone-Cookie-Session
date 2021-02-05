@@ -26,6 +26,9 @@ class timezone_module {
     // Set Cookie
     setCookie() { return require('./files/setCookie').apply(this, arguments); }
 
+    // Get Client Web
+    getClientWeb() { return require('./files/clientWeb').toString(); }
+
     // Get Moment Module
     getMoment() { return this.module; }
 

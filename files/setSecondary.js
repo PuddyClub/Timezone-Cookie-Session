@@ -14,6 +14,7 @@ module.exports = function (req) {
     if (typeof req !== "string") {
 
         // Set Session Values
+        this.cfgSecondary.isSession = true;
         if (typeof req.session[this.sessionVars.secondary_timezone] !== "string" || !req.session[this.sessionVars.secondary_timezone]) {
             req.session[this.sessionVars.secondary_timezone] = 'auto';
         }
@@ -30,6 +31,7 @@ module.exports = function (req) {
 
     // String
     else {
+        this.cfgSecondary.isSession = false;
         this.cfgSecondary.auto = false;
         this.cfgSecondary.actived = req;
     }

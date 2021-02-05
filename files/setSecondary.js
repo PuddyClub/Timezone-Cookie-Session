@@ -7,9 +7,6 @@ module.exports = function (req) {
     
     */
 
-    // Prepare Main Variable
-    if (!this.cfgSecondary) { this.cfgSecondary = {}; }
-
     // Normal
     if (typeof req !== "string") {
 

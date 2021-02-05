@@ -89,6 +89,9 @@ module.exports = function (req, data) {
         this.clockCfg.format2 = "HH:mm";
     }
 
+    // Secondary Timezone
+    this.cfgSecondary = {};
+
     // Complete
     return this;
 

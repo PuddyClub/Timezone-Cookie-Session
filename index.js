@@ -24,7 +24,7 @@ class timezone_module {
     getClockCfg() { return this.clockCfg; }
 
     // UTC
-    convertUTC() { return require('./files/convertUTC').apply(this, arguments); },
+    convertUTC() { return require('./files/convertUTC').apply(this, arguments); }
     createUTC() { return require('./files/createUTC').apply(this, arguments); }
     getUTCValue() { return this.utcValue; }
 

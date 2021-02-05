@@ -1,4 +1,4 @@
-module.exports = function (data) {
+module.exports = function (data = {}) {
     return require('./base').toString()
     .replace('{{primaryTimezone}}', this.cfg.actived)
     .replace('{{secondaryTimezone}}', this.cfgSecondary.actived)

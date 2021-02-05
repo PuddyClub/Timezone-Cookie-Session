@@ -9,6 +9,9 @@ class timezone_module {
     // List Generator
     getNames() { if (!this.names) { this.names = this.tz.names(); } return this.names; }
 
+    // Get Main Timezone
+    getMainTimezone() { return this.main; }
+
     // Get Primary Timezone
     getPrimary() { return this.cfg; }
     getPrimaryValue() { return this.cfg.actived; }

@@ -29,8 +29,8 @@ module.exports = function (data = {}) {
     tinyclock.formatTime = `{{clockFormat}}`;
     tinyclock.formatTime = `{{clockFormat2}}`;
     tinyclock.mainTimezone = `{{mainTimezone}}`;
-    tinyclock.is24hours = false;
-    if (`{{type24hoursOn}}` === "true") { tinyclock.is24hours = true; }
+    tinyclock.is24hours = null;
+    if (`{{type24hoursOn}}` === "true") { tinyclock.is24hours = true; } else { tinyclock.is24hours = false; }
 
     // Complete
     return tinyclock;

@@ -1,5 +1,6 @@
 module.exports = function (data = {}) {
     return require('./base').toString()
+    .replace('{{utcValue}}', this.utcValue)
     .replace('{{primaryTimezone}}', this.cfg.actived)
     .replace('{{secondaryTimezone}}', this.cfgSecondary.actived)
     .replace('{{clockFormat}}', this.clockCfg.format)

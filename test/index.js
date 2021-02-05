@@ -1,2 +1,3 @@
 // Module
-const timezone_lib = require('../index');
+const moment = require('../index');
+

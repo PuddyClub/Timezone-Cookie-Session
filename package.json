@@ -1,5 +1,5 @@
 {
-  "name": "@tinypudding/timezone-lib",
+  "name": "@tinypudding/timezone-cookie-session",
   "version": "1.0.0",
   "description": "Codes to help work with Timezone using the moment-timezone module.",
   "main": "index.js",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/TinyPudding/Timezone-Lib#readme",
   "dependencies": {
+    "lodash": "^4.17.20",
     "moment-timezone": "^0.5.32"
   }
 }

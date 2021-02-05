@@ -7,6 +7,9 @@ module.exports = function (req, data) {
         // Module Language
         locale: 'en',
 
+        // UTC Value
+        utcValue: 'Universal',
+
         // Main Values
         mainTimezone: 'Universal',
 
@@ -25,6 +28,9 @@ module.exports = function (req, data) {
         }
     
     });
+
+    // UTC Value
+    this.utcValue = tinyCfg.utcValue;
 
     // Main Timezone
     this.main = tinyCfg.mainTimezone;

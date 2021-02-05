@@ -3,10 +3,19 @@ module.exports = function (body) {
     // Lodash Module
     const _ = require('lodash');
     const tinyCfg = _.defaultsDeep({}, body, {
+        
+        // Date Value
         date: '',
+
+        // Time Value
         time: '',
+
+        // Timezone Value
         timezone: 'Universal',
-        type: 'toDate'
+
+        // Final Value Result (toDate or toString or valueOf or format)
+        type: 'toString'
+
     });
 
     // Prepare Result
@@ -35,6 +44,22 @@ module.exports = function (body) {
     }
 
     // Complete
-    return dateResult[tinyCfg.type]();
+
+    // Format
+    if(tinyCfg.type === "format") {
+        
+        dateResult.tz('Universal');
+
+    } 
+    
+    // to String
+    else if(tinyCfg.type === "toString") {
+        
+    } 
+    
+    // Other
+    else {
+        return dateResult[tinyCfg.type]();
+    }
 
 };

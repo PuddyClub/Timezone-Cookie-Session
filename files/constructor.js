@@ -13,32 +13,32 @@ module.exports = function (req, data) {
     // Time Now
     this.now = this.module('Universal');
 
-    // Manual Timezone
+    // Set Timezone
     this.cfg = {};
-    if (typeof req.session.manual_timezone !== "string" || !req.session.manual_timezone) {
-        req.session.manual_timezone = 'auto';
+    if (typeof req.session.primary_timezone !== "string" || !req.session.primary_timezone) {
+        req.session.primary_timezone = 'auto';
     }
 
-    if (typeof req.session.manual_timezone !== "string" || !req.session.manual_timezone) {
-        req.session.manual_timezone = 'auto';
+    if (typeof req.session.primary_timezone !== "string" || !req.session.primary_timezone) {
+        req.session.primary_timezone = 'auto';
     }
 
-    if (req.session.manual_timezone === "auto") {
+    if (req.session.primary_timezone === "auto") {
         this.cfg.auto = true;
         this.cfg.actived = req.session.timezone;
     } else {
         this.cfg.auto = false;
-        this.cfg.actived = req.session.manual_timezone;
+        this.cfg.actived = req.session.primary_timezone;
     }
 
     if (this.cfg.actived) {
         this.cfg.info = this.cfg.actived.replace(/\_/g, ' ');
     } else {
-        this.cfg.info = 'Not detected'
+        this.cfg.info = '???';
     }
 
-    // Main Timezone
-    this.cfg.main = tinyCfg.mainTimezone;
+    // Get List
+    this.cfg.list = require('./selectList/timezone')(req.session.primary_timezone);
 
     // Complete
     return this;

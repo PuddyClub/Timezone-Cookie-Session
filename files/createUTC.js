@@ -14,7 +14,7 @@ module.exports = function (body) {
         timezone: this.utcValue,
 
         // Final Value Result (toDate or toString or valueOf or format)
-        type: 'toString'
+        type: 'toDate'
 
     });
 

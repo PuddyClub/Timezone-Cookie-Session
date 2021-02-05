@@ -7,6 +7,9 @@ module.exports = function (req, data) {
         mainTimezone: 'Universal'
     });
 
+    // Main Timezone
+    this.main = tinyCfg.mainTimezone;
+
     // Prepare Module
     this.module = require('moment-timezone');
 

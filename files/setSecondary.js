@@ -1,11 +1,4 @@
-module.exports = function (data) {
-
-    // Lodash Module
-    const _ = require('lodash');
-
-    const tinyCfg = _.defaultsDeep({}, data, {
-        mainTimezone: 'Universal'
-    });
+module.exports = function (req) {
 
     if (typeof req.session.secondary_timezone !== "string" || !req.session.secondary_timezone) {
         req.session.secondary_timezone = 'auto';
@@ -13,7 +6,7 @@ module.exports = function (data) {
 
     if (req.session.secondary_timezone === "auto") {
         this.cfgSecondary.auto = true;
-        this.cfgSecondary.actived = tinyCfg.mainTimezone;
+        this.cfgSecondary.actived = this.main;
     } else {
         this.cfgSecondary.auto = false;
         this.cfgSecondary.actived = req.session.secondary_timezone;

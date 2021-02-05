@@ -1,19 +1,37 @@
 module.exports = function (req) {
 
-    // Prepare Main Variable
-    this.cfgSecondary = {};
+    /* 
+    
+        req object works with req.session.
+        req string works with the module values only.
+    
+    */
 
-    // Set Values
-    if (typeof req.session[this.sessionVars.secondary_timezone] !== "string" || !req.session[this.sessionVars.secondary_timezone]) {
-        req.session[this.sessionVars.secondary_timezone] = 'auto';
+    // Prepare Main Variable
+    if (!this.cfgSecondary) { this.cfgSecondary = {}; }
+
+    // Normal
+    if (typeof req !== "string") {
+
+        // Set Session Values
+        if (typeof req.session[this.sessionVars.secondary_timezone] !== "string" || !req.session[this.sessionVars.secondary_timezone]) {
+            req.session[this.sessionVars.secondary_timezone] = 'auto';
+        }
+
+        if (req.session[this.sessionVars.secondary_timezone] === "auto") {
+            this.cfgSecondary.auto = true;
+            this.cfgSecondary.actived = this.main;
+        } else {
+            this.cfgSecondary.auto = false;
+            this.cfgSecondary.actived = req.session[this.sessionVars.secondary_timezone];
+        }
+
     }
 
-    if (req.session[this.sessionVars.secondary_timezone] === "auto") {
-        this.cfgSecondary.auto = true;
-        this.cfgSecondary.actived = this.main;
-    } else {
+    // String
+    else {
         this.cfgSecondary.auto = false;
-        this.cfgSecondary.actived = req.session[this.sessionVars.secondary_timezone];
+        this.cfgSecondary.actived = req;
     }
 
     if (this.cfgSecondary.actived) {
@@ -23,7 +41,9 @@ module.exports = function (req) {
     }
 
     // Get List
-    this.cfgSecondary.list = require('./selectList/timezone')(req.session[this.sessionVars.secondary_timezone]);
+    if (typeof req !== "string") {
+        this.cfgSecondary.list = require('./selectList/timezone')(req.session[this.sessionVars.secondary_timezone]);
+    }
 
     // Complete
     return;

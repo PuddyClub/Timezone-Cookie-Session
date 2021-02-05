@@ -1,18 +1,31 @@
-module.exports = function (utcTime, timezone = 'Universal', allowSecondary = true, timeFormat = 'dddd, MMMM Do YYYY, ') {
+module.exports = function (data) {
 
-    /* 
-        utcTime: The original time stored in a UTC Value
-        timezone: The timezone of the UTC Value
-    */
+    // Lodash Module
+    const _ = require('lodash');
+    const tinyCfg = _.defaultsDeep({}, data, {
+
+        // The original time stored in a UTC Value
+        utcTime: null,
+
+        // The timezone of the UTC Value
+        timezone: 'Universal',
+
+        // Allow Secondary Timezone Values
+        allowSecondary: true,
+
+        // Time Format
+        timeFormat: 'dddd, MMMM Do YYYY, '
+
+    });
 
     // Prepare Result
-    const result = { vanilla: utcTime };
+    const result = { vanilla: tinyCfg.utcTime };
 
     // Exist Secondary
-    const existSecondary = (allowSecondary && this.cfgSecondary);
+    const existSecondary = (tinyCfg.allowSecondary && this.cfgSecondary);
 
     // Convert Clock Data
-    result.time = this.module.tz(result.vanilla, timezone);
+    result.time = this.module.tz(result.vanilla, tinyCfg.timezone);
     result.utc = result.time.clone();
     result.utcUnix = result.utc.unix();
 
@@ -21,7 +34,7 @@ module.exports = function (utcTime, timezone = 'Universal', allowSecondary = tru
     result.time.tz(this.cfg.actived);
 
     // Format
-    const timeFormatResult = `${timeFormat}${this.clockCfg.format2}`;
+    const timeFormatResult = `${tinyCfg.timeFormat}${this.clockCfg.format2}`;
     result.time = result.time.format(timeFormatResult);
     if (existSecondary) { result.secondary_time = result.secondary_time.format(timeFormatResult); }
 

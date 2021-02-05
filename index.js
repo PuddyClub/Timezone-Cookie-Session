@@ -11,9 +11,11 @@ class timezone_module {
 
     // Get Primary Timezone
     getPrimary() { return this.cfg; }
+    getPrimaryValue() { return this.cfg.actived; }
 
     // Get Secondary Timezone
     getSecondary() { return this.cfgSecondary; }
+    getSecondaryValue() { return this.cfgSecondary.actived; }
 
     // Get Clock Config
     getClockCfg() { return this.clockCfg; }
@@ -23,6 +25,9 @@ class timezone_module {
 
     // Set Cookie
     setCookie() { return require('./files/setCookie').apply(this, arguments); }
+
+    // Get Moment Module
+    getMoment() { return this.module; }
 
 };
 

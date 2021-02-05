@@ -39,9 +39,6 @@ module.exports = function (req, data) {
     // Set Language
     this.module.locale(tinyCfg.locale);
 
-    // Time Now
-    this.now = this.module('Universal');
-
     // Set Timezone
     this.cfg = {};
     if (typeof req.session[this.sessionVars.primary_timezone] !== "string" || !req.session[this.sessionVars.primary_timezone]) {

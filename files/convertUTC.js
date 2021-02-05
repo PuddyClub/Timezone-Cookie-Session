@@ -8,7 +8,7 @@ module.exports = function (data) {
         utcTime: null,
 
         // The timezone of the UTC Value
-        timezone: 'Universal',
+        timezone: this.utcValue,
 
         // Allow Secondary Timezone Values
         allowSecondary: true,

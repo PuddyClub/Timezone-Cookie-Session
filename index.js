@@ -26,6 +26,7 @@ class timezone_module {
     // UTC
     convertUTC() { return require('./files/convertUTC').apply(this, arguments); },
     createUTC() { return require('./files/createUTC').apply(this, arguments); }
+    getUTCValue() { return this.utcValue; }
 
     // Set Cookie
     setCookie() { return require('./files/setCookie').apply(this, arguments); }

@@ -11,7 +11,7 @@ module.exports = function (body) {
         time: '',
 
         // Timezone Value
-        timezone: 'Universal',
+        timezone: this.utcValue,
 
         // Final Value Result (toDate or toString or valueOf or format)
         type: 'toString'
@@ -48,7 +48,7 @@ module.exports = function (body) {
     // Format
     if(tinyCfg.type === "format") {
         
-        dateResult.tz('Universal');
+        dateResult.tz(this.utcValue);
 
     } 
     

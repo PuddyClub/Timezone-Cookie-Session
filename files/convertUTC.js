@@ -14,7 +14,13 @@ module.exports = function (data) {
         allowSecondary: true,
 
         // Time Format
-        timeFormat: 'dddd, MMMM Do YYYY, '
+        timeFormat: 'dddd, MMMM Do YYYY, ',
+
+        // Get Unix
+        getUnix: true,
+
+        // Get Format
+        getFormat: true
 
     });
 
@@ -27,16 +33,20 @@ module.exports = function (data) {
     // Convert Clock Data
     result.time = this.module.tz(result.vanilla, tinyCfg.timezone);
     result.utc = result.time.clone();
-    result.utcUnix = result.utc.unix();
 
-    // Set Primary Timezone
+    // Get Unix
+    if (tinyCfg.getUnix) { result.utcUnix = result.utc.unix(); }
+
+    // Set Timezone
     if (existSecondary) { result.secondary_time = result.time.clone().tz(this.cfgSecondary.actived); }
     result.time.tz(this.cfg.actived);
 
     // Format
-    const timeFormatResult = `${tinyCfg.timeFormat}${this.clockCfg.format2}`;
-    result.time = result.time.format(timeFormatResult);
-    if (existSecondary) { result.secondary_time = result.secondary_time.format(timeFormatResult); }
+    if (tinyCfg.getFormat) {
+        const timeFormatResult = `${tinyCfg.timeFormat}${this.clockCfg.format2}`;
+        result.time = result.time.format(timeFormatResult);
+        if (existSecondary) { result.secondary_time = result.secondary_time.format(timeFormatResult); }
+    }
 
     // Complete
     return result;

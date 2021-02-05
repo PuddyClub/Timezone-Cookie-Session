@@ -9,6 +9,15 @@ class timezone_module {
     // List Generator
     getNames() { if (!this.names) { this.names = this.tz.names(); } return this.names; }
 
+    // Get Primary Timezone
+    getPrimary() { return this.cfg; }
+
+    // Get Secondary Timezone
+    getSecondary() { return this.cfgSecondary; }
+
+    // Get Clock Config
+    getClockCfg() { return this.clockCfg; }
+
     // Set Cookie
     setCookie() { return require('./files/setCookie').apply(this, arguments); }
 

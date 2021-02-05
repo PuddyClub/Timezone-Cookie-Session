@@ -14,6 +14,12 @@ module.exports = function (req, data) {
             secondary_timezone: 'secondary_timezone',
             timezone: 'timezone',
             clock24: 'clock24'
+        },
+
+        // Clock Lang
+        clockLang: {
+            off: '12 Hours',
+            on: '24 Hours'
         }
     
     });
@@ -63,7 +69,7 @@ module.exports = function (req, data) {
     }
 
     this.clockCfg = {
-        typeOption: setConfig.clock24(req.session[this.sessionVars.clock24]),
+        typeOption: require('./selectList/clockType')(req.session[this.sessionVars.clock24], tinyCfg.clockLang),
         type24hours: req.session[this.sessionVars.clock24]
     };
 

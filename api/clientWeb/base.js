@@ -12,7 +12,7 @@ module.exports = function (data = {
     if (typeof data.divSecondary !== "string") { data.divSecondary = '#secondary_clock'; }
     if (typeof data.csrfToken !== "string") { data.csrfToken = null; }
     if (typeof data.autoTimezoneCallback !== "function") { data.autoTimezoneCallback = null; }
-    if (typeof data.formatDate !== "string") { `dddd, MMMM Do YYYY`; }
+    if (typeof data.formatDate !== "string") { data.formatDate = `dddd, MMMM Do YYYY`; }
 
     // Timezone
     const tinyclock = {
@@ -111,7 +111,7 @@ module.exports = function (data = {
         if (data.jQuerydivClock) { $(data.divPrimaryClock).text(tinyclock.clock.timezone.format(tinyclock.clockFormat)); }
 
         // Secondary Timezone
-        if (useSecondaryTimezone && tinyclock.timezone !== tinyclock.secondary_timezone) {
+        if (data.useSecondaryTimezone && tinyclock.timezone !== tinyclock.secondary_timezone) {
             tinyclock.clock.secondary_timezone = tinyclock.clock.utc.clone().tz(tinyclock.secondary_timezone);
             if (data.jQuerydivClock) { $(data.divSecondary).text(tinyclock.clock.secondary_timezone.format(tinyclock.clockFormat)); }
         }

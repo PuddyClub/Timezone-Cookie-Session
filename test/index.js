@@ -36,13 +36,20 @@ app.use(express.static(path.join(__dirname, '/public'), {
 const timezoneCfg = { urls: { setCookie: '/setCookie' } };
 const tzEx = require('../express');
 const timezoneExpress = new tzEx(app, timezoneCfg, function (req, res) {
+    return new Promise(function (resolve) {
+        return bodyParseN(req, res, () => {
 
-    // Return csrfToken
-    return {
-        now: '',
-        server: ''
-    };
+            // Return csrfToken
+            resolve({
+                now: '',
+                server: ''
+            });
 
+            // Complete
+            return;
+
+        });
+    });
 });
 
 app.use(timezoneExpress.insert());

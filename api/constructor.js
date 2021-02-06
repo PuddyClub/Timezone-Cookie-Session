@@ -9,6 +9,9 @@ module.exports = function (req, data) {
             setCookie: '/setCookie'
         },
 
+        // Clock 24 Hours Default Value
+        clock24: false,
+
         // Module Language
         locale: 'en',
 
@@ -31,7 +34,7 @@ module.exports = function (req, data) {
             off: '12 Hours',
             on: '24 Hours'
         }
-    
+
     });
 
     // URLs
@@ -81,7 +84,13 @@ module.exports = function (req, data) {
 
     // Prepare Clock
     if (typeof req.session[this.sessionVars.clock24] !== "string" || !req.session[this.sessionVars.clock24] || (req.session[this.sessionVars.clock24] !== "on" && req.session[this.sessionVars.clock24] !== "off")) {
-        req.session[this.sessionVars.clock24] = 'off';
+
+        if (!tinyCfg.clock24) {
+            req.session[this.sessionVars.clock24] = 'off';
+        } else {
+            req.session[this.sessionVars.clock24] = 'on';
+        }
+
     }
 
     this.clockCfg = {

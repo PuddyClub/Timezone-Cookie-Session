@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, '/public'), {
 
 // Timezone Module
 const tzEx = require('../index');
-const timezoneExpress = new tzEx(app, { urls: { setCookie: '/setCookie' } }, function (req, res) {
+const timezoneExpress = new tzEx(app, { urls: { setCookie: '/setCookie' }, clock24: true }, function (req, res) {
     return new Promise(function (resolve) {
         bodyParseN(req, res, () => {
 
@@ -57,6 +57,7 @@ app.use(timezoneExpress.insert());
 // Get
 app.get('/', (req, res) => {
     console.log(req.timezone);
+    console.log(req.session);
     return res.render('test', { timezoneTemplate: req.timezone.getClientWeb() });
 });
 

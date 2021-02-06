@@ -32,7 +32,7 @@ class timezone_module {
     getUTCValue() { return this.utcValue; }
 
     // Set Cookie
-    setCookie() { return require('./setCookie'); }
+    setCookie() { return require('./setCookie').apply(this, arguments); }
 
     // Get Client Web
     getClientWeb() { return require('./clientWeb').apply(this, arguments); }

@@ -1,39 +1,59 @@
-module.exports = function (data = {}, getCsrfToken = function () {
-    return {
-        now: '',
-        server: ''
-    };
-}) {
+class expressTimezone {
 
-    // Express Callback
-    return async (req, res, next) => {
+    // Constructor
+    constructor(app, data = {}, getCsrfToken = function (req, res) {
+        return {
+            now: '',
+            server: ''
+        };
+    }) {
 
-        // Timezone Module
-        const genTimezone = require('./index');
+        // Lodash Module
+        const _ = require('lodash');
+        this.data = _.defaultsDeep({}, data, {
 
-        // Insert Module
-        req.timezone = new genTimezone(req, data);
+            // URLs
+            urls: {
+                setCookie: '/setCookie'
+            },
 
-        // Set Cookie URL
-        const setCookieURL = req.timezone.getUrls().setCookie;
+        });
 
-        // Next Item
-        if (req.url !== setCookieURL && !req.url.startsWith(setCookieURL + '?')) {
-            next();
-        }
-
-        // Nope
-        else {
+        // Get Set Cookie
+        app.post(this.data.urls.setCookie, async function (req, res) {
 
             // Send Request
-            let csrfToken = await getCsrfToken(req, res, next);
+            let csrfToken = await getCsrfToken(req, res);
             req.timezone.setCookie(req, res, csrfToken);
 
-        }
+            // Complete
+            return;
+
+        });
 
         // Complete
-        return;
+        return this;
 
-    };
-    
+    }
+
+    // Insert Express
+    insert() {
+        const tinyThis = this;
+        return (req, res, next) => {
+
+            // Timezone Module
+            const genTimezone = require('./index');
+
+            // Insert Module
+            req.timezone = new genTimezone(req, this.data);
+            next();
+
+            // Complete
+            return;
+
+        };
+    }
+
 };
+
+module.exports = expressTimezone;

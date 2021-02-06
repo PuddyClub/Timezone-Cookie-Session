@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <title>Test</title>
+        <script>
+            var tinyclock = {{timezoneTemplate}}();
+        </script>
+
+    </head>
+
+    <body>
+
+        Mio!
+
+    </body>
+
+</html>

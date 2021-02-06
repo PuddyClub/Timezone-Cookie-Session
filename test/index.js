@@ -9,7 +9,10 @@ const app = express();
 
 // Timezone Module
 const timezoneCfg = { urls: { setCookie: '/setCookie' } };
-app.use(require('../express')(timezoneCfg));
+const tzEx = require('../express');
+const timezoneExpress = new tzEx(timezoneCfg);
+
+app.use(timezoneExpress.insert());
 
 // Cookie Session
 app.use(cookieSession({
@@ -37,15 +40,6 @@ app.use(express.static(path.join(__dirname, '/public'), {
 
 // Get
 app.get('*', (req, res) => {
-
-
-
-});
-
-// Get
-app.post('*', (req, res) => {
-
-
-
+    return res.render('test', timezoneTemplate: req.timezone.getClientWeb());
 });
 

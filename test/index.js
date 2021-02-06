@@ -40,6 +40,6 @@ app.use(express.static(path.join(__dirname, '/public'), {
 
 // Get
 app.get('*', (req, res) => {
-    return res.render('test', timezoneTemplate: req.timezone.getClientWeb());
+    return res.render('test', { timezoneTemplate: req.timezone.getClientWeb() });
 });
 

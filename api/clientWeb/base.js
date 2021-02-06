@@ -1,4 +1,4 @@
-module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock: false }) {
+module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock: false, autoTimezoneCallback: null }) {
 
     // Validate Vars
     if (typeof data.jQuerydivClock !== "boolean") { data.jQuerydivClock = false; }
@@ -28,7 +28,7 @@ module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock:
 
         // Set Cookie
         setCookie: function (type, value, csrfToken) {
-            return new Promise(function(resolve, reject) {
+            return new Promise(function (resolve, reject) {
 
                 fetch(tinyclock.urls.setCookie, {
                     method: 'POST',
@@ -38,14 +38,14 @@ module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock:
                     },
                     body: JSON.stringify({ type: type, value: value, csrfToken: csrfToken })
                 })
-                .then(() => {
-                    resolve();
-                    return;
-                })
-                .catch(err => {
-                    reject(err);
-                    return;
-                });
+                    .then(() => {
+                        resolve();
+                        return;
+                    })
+                    .catch(err => {
+                        reject(err);
+                        return;
+                    });
 
                 // Complete
                 return;
@@ -59,7 +59,28 @@ module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock:
     // Compare Clock
     if (`{{primaryTimezoneisAuto}}` === "true") {
         if (tinyclock.timezone !== tinyclock.newTimezone) {
-            tinyclock.fetch.setCookie('timezone', tinyclock.newTimezone, data.csrfToken);
+
+            // Start Set Auto Timezone
+            const setAutoTimezone = function () {
+                return new Promise(function (resolve, reject) {
+                    tinyclock.fetch.setCookie('timezone', tinyclock.newTimezone, data.csrfToken).then(() => {
+                        resolve();
+                        return;
+                    }).catch(err => {
+                        reject(err);
+                        return;
+                    });
+                });
+            };
+
+            // Exist Function
+            if (typeof data.autoTimezoneCallback === "function") {
+                data.autoTimezoneCallback(setAutoTimezone);
+            }
+
+            // Nope
+            else { setAutoTimezone(); }
+
         }
     }
 

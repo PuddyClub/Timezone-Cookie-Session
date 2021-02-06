@@ -10,6 +10,7 @@ class expressTimezone {
 
         // Insert App
         this.app = app;
+        this.getCsrfToken = getCsrfToken;
 
         // Lodash Module
         const _ = require('lodash');
@@ -49,10 +50,11 @@ class expressTimezone {
     start() {
 
         // Set Cookie
+        const tinyThis = this;
         this.app.post(this.data.urls.setCookie, async function (req, res) {
 
             // Send Request
-            let csrfToken = await getCsrfToken(req, res);
+            let csrfToken = await tinyThis.getCsrfToken(req, res);
             req.timezone.setCookie(req, res, csrfToken);
 
             // Complete

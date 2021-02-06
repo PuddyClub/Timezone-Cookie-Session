@@ -59,6 +59,9 @@ app.get('/', (req, res) => {
     return res.render('test', { timezoneTemplate: req.timezone.getClientWeb() });
 });
 
+// Start Timezone Module
+timezoneExpress.start();
+
 app.listen(5000, function () {
     console.log('http://localhost:5000');
 });

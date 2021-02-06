@@ -8,6 +8,9 @@ class expressTimezone {
         };
     }) {
 
+        // Insert App
+        this.app = app;
+
         // Lodash Module
         const _ = require('lodash');
         this.data = _.defaultsDeep({}, data, {
@@ -16,18 +19,6 @@ class expressTimezone {
             urls: {
                 setCookie: '/setCookie'
             },
-
-        });
-
-        // Get Set Cookie
-        app.post(this.data.urls.setCookie, async function (req, res) {
-
-            // Send Request
-            let csrfToken = await getCsrfToken(req, res);
-            req.timezone.setCookie(req, res, csrfToken);
-
-            // Complete
-            return;
 
         });
 
@@ -52,6 +43,23 @@ class expressTimezone {
             return;
 
         };
+    }
+
+    // Start Module
+    start() {
+
+        // Set Cookie
+        this.app.post(this.data.urls.setCookie, async function (req, res) {
+
+            // Send Request
+            let csrfToken = await getCsrfToken(req, res);
+            req.timezone.setCookie(req, res, csrfToken);
+
+            // Complete
+            return;
+
+        });
+
     }
 
 };

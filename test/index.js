@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, '/public'), {
 const tzEx = require('../index');
 const timezoneExpress = new tzEx(app, { urls: { setCookie: '/setCookie' } }, function (req, res) {
     return new Promise(function (resolve) {
-        return bodyParseN(req, res, () => {
+        bodyParseN(req, res, () => {
 
             // Return csrfToken
             resolve({
@@ -48,6 +48,7 @@ const timezoneExpress = new tzEx(app, { urls: { setCookie: '/setCookie' } }, fun
             return;
 
         });
+        return;
     });
 });
 

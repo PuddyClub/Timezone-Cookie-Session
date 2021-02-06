@@ -101,11 +101,12 @@ module.exports = function (req, data) {
 
     // Main Values
     this.clockCfg = {
-        type24hours: req.session[this.sessionVars.clock24]
+        type24hours: req.session[this.sessionVars.clock24],
+        langVars: tinyCfg.clockLang
     };
 
     // Auto List
-    if (this.autoList) { this.clockCfg.typeOption = require('./selectList/clockType').apply(this, [req.session[this.sessionVars.clock24], tinyCfg.clockLang]); }
+    if (this.autoList) { this.clockCfg.typeOption = require('./selectList/clockType').apply(this, [req.session[this.sessionVars.clock24], this.clockCfg.langVars]); }
 
     // Clock Values
     if (this.clockCfg.type24hours === "off") {

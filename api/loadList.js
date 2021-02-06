@@ -25,7 +25,7 @@ module.exports = function (req, where) {
 
     // Clock Config
     if (tinyCfg.clockCfg) {
-        this.clockCfg.typeOption = require('./selectList/clockType').apply(this, [req.session[this.sessionVars.clock24], tinyCfg.clockLang]);
+        this.clockCfg.typeOption = require('./selectList/clockType').apply(this, [req.session[this.sessionVars.clock24], this.clockCfg.langVars]);
         tinyresult.clockCfg = this.clockCfg.typeOption;
     }
 

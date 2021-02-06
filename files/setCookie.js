@@ -4,7 +4,7 @@ module.exports = async function (req, res, csrfToken = {
 }) {
 
     // Yes
-    if (typeof req.body.value === "string") {
+    if (req.method === "POST" && req.body && typeof req.body.value === "string") {
 
         // Check Code
         if (csrfToken.now !== csrfToken.server) {

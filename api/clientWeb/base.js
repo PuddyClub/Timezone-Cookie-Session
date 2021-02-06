@@ -1,9 +1,17 @@
-module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock: false, autoTimezoneCallback: null }) {
+module.exports = function (data = {
+    useSecondaryTimezone: false, 
+    jQuerydivClock: false, 
+    autoTimezoneCallback: null, 
+    csrfToken: null
+}) {
 
     // Validate Vars
+    if (typeof data.useSecondaryTimezone !== "boolean") { data.useSecondaryTimezone = false; }
     if (typeof data.jQuerydivClock !== "boolean") { data.jQuerydivClock = false; }
     if (typeof data.divPrimaryClock !== "string") { data.divPrimaryClock = '#primary_clock'; }
     if (typeof data.divSecondary !== "string") { data.divSecondary = '#secondary_clock'; }
+    if (typeof data.csrfToken !== "string") { data.csrfToken = null; }
+    if (typeof data.autoTimezoneCallback !== "function") { data.autoTimezoneCallback = null; }
 
     // Timezone
     const tinyclock = {

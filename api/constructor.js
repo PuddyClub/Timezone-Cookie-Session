@@ -4,6 +4,9 @@ module.exports = function (req, data) {
     const _ = require('lodash');
     const tinyCfg = _.defaultsDeep({}, data, {
 
+        // Allow Set Secondary
+        setSecondary: false,
+
         // Auto List
         autoList: false,
 
@@ -119,6 +122,7 @@ module.exports = function (req, data) {
 
     // Secondary Timezone
     this.cfgSecondary = {};
+    if (tinyCfg.setSecondary) { this.setSecondary(req); }
 
     // Complete
     return this;

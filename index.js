@@ -54,7 +54,7 @@ class expressTimezone {
         this.app.post(this.data.urls.setCookie, async function (req, res) {
 
             // Send Request
-            let csrfToken = await tinyThis.getCsrfToken(req, res);
+            const csrfToken = await tinyThis.getCsrfToken(req, res);
             req.timezone.setCookie(req, res, csrfToken);
 
             // Complete

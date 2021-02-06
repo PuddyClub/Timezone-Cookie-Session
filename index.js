@@ -3,6 +3,9 @@ class timezone_module {
     // Constructor
     constructor() { return require('./files/constructor').apply(this, arguments); }
 
+    // Get URLs
+    getUrls() { return this.urls; }
+
     // Set Secondary Timezone
     setSecondary() { return require('./files/setSecondary').apply(this, arguments); }
 

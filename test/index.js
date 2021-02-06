@@ -4,11 +4,12 @@ const nunjucks = require('nunjucks');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 
-// Timezone Module
-const createTimezoneSession = require('../index');
-
 // Prepare Express
 const app = express();
+
+// Timezone Module
+const timezoneCfg = { urls: { setCookie: '/setCookie' } };
+app.use(require('../express')(timezoneCfg));
 
 // Cookie Session
 app.use(cookieSession({
@@ -47,6 +48,4 @@ app.post('*', (req, res) => {
 
 
 });
-
-const timezone = new createTimezoneSession();
 

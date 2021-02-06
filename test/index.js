@@ -8,21 +8,6 @@ const path = require('path');
 // Prepare Express
 const app = express();
 
-// Timezone Module
-const timezoneCfg = { urls: { setCookie: '/setCookie' } };
-const tzEx = require('../express');
-const timezoneExpress = new tzEx(app, timezoneCfg, function (req, res) {
-
-    // Return csrfToken
-    return {
-        now: '',
-        server: ''
-    };
-
-});
-
-app.use(timezoneExpress.insert());
-
 // Cookie Session
 app.use(cookieSession({
     keys: ['00000000000', '00000000000']
@@ -46,6 +31,21 @@ app.set('view engine', 'nunjucks');
 app.use(express.static(path.join(__dirname, '/public'), {
     maxAge: '2592000000' // uses milliseconds per docs
 }));
+
+// Timezone Module
+const timezoneCfg = { urls: { setCookie: '/setCookie' } };
+const tzEx = require('../express');
+const timezoneExpress = new tzEx(app, timezoneCfg, function (req, res) {
+
+    // Return csrfToken
+    return {
+        now: '',
+        server: ''
+    };
+
+});
+
+app.use(timezoneExpress.insert());
 
 // Get
 app.get('*', (req, res) => {

@@ -54,8 +54,8 @@ const timezoneExpress = new tzEx(app, { urls: { setCookie: '/setCookie' }, clock
 
 app.use(timezoneExpress.insert());
 
-// Get
-app.get('/', (req, res) => {
+// Homepage
+app.all('/', (req, res) => {
 
     console.group(new Date().toString());
     console.log(req.session);

@@ -8,6 +8,9 @@ module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock:
     // Timezone
     const tinyclock = {
         extra_loops: [],
+        urls: {
+            setCookie: `{{setCookieURL}}`
+        },
         timezone: `{{primaryTimezone}}`,
         secondary_timezone: `{{secondaryTimezone}}`,
         formatDate: `dddd, MMMM Do YYYY`,
@@ -23,7 +26,7 @@ module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock:
     // Compare Clock
     if (`{{primaryTimezoneisAuto}}` === "true") {
         if (tinyclock.timezone !== tinyclock.newTimezone && csrfToken) {
-            fetch("/setCookie", {
+            fetch(tinyclock.urls.setCookie, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

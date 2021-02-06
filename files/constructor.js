@@ -4,6 +4,11 @@ module.exports = function (req, data) {
     const _ = require('lodash');
     const tinyCfg = _.defaultsDeep({}, data, {
 
+        // URLs
+        urls: {
+            setCookie: '/setCookie'
+        },
+
         // Module Language
         locale: 'en',
 
@@ -28,6 +33,9 @@ module.exports = function (req, data) {
         }
     
     });
+
+    // URLs
+    this.urls = tinyCfg.urls;
 
     // UTC Value
     this.utcValue = tinyCfg.utcValue;

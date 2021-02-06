@@ -1,7 +1,7 @@
 module.exports = function (data = {
-    useSecondaryTimezone: false, 
-    jQuerydivClock: false, 
-    autoTimezoneCallback: null, 
+    useSecondaryTimezone: false,
+    jQuerydivClock: false,
+    autoTimezoneCallback: null,
     csrfToken: null
 }) {
 
@@ -20,6 +20,7 @@ module.exports = function (data = {
         urls: {
             setCookie: `{{setCookieURL}}`
         },
+        locale: `{{momentjsLang}}`,
         timezone: `{{primaryTimezone}}`,
         secondary_timezone: `{{secondaryTimezone}}`,
         formatDate: data.formatDate,
@@ -31,6 +32,9 @@ module.exports = function (data = {
             .tz
             .guess()
     };
+
+    // Set Moment Locale
+    moment.locale(tinyclock.locale);
 
     // Fetch
     tinyclock.fetch = {

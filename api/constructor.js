@@ -63,6 +63,7 @@ module.exports = function (req, data) {
 
     // Set Language
     this.module.locale(tinyCfg.locale);
+    this.locale = tinyCfg.locale;
 
     // Set Timezone
     this.cfg = {};

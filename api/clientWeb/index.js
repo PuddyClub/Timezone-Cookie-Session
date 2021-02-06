@@ -10,6 +10,7 @@ module.exports = function () {
 
     // Return Data
     return baseData
+        .replace('{{momentjsLang}}', this.locale)
         .replace('{{setCookieURL}}', this.urls.setCookie)
         .replace('{{utcValue}}', this.utcValue)
         .replace('{{primaryTimezone}}', this.cfg.actived)

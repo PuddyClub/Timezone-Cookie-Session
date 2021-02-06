@@ -10,7 +10,15 @@ const app = express();
 // Timezone Module
 const timezoneCfg = { urls: { setCookie: '/setCookie' } };
 const tzEx = require('../express');
-const timezoneExpress = new tzEx(timezoneCfg);
+const timezoneExpress = new tzEx(app, timezoneCfg, function (req, res) {
+    
+    // Return csrfToken
+    return {
+        now: '',
+        server: ''
+    };
+
+});
 
 app.use(timezoneExpress.insert());
 

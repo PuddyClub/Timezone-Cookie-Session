@@ -37,7 +37,7 @@ class expressTimezone {
             const genTimezone = require('./api');
 
             // Insert Module
-            req.timezone = new genTimezone(req, this.data);
+            req.timezone = new genTimezone(req, tinyThis.data);
             next();
 
             // Complete

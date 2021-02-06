@@ -1,10 +1,12 @@
 // Base Data
 let baseData = null;
 
-module.exports = function (data = {}) {
+module.exports = function () {
 
     // Cache Value
-    if (typeof baseData !== "string") { baseData = require('./base').toString(); }
+    if (typeof baseData !== "string") {
+        baseData = require('./base').toString();
+    }
 
     // Return Data
     return baseData

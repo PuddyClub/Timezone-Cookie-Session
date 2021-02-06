@@ -12,6 +12,7 @@ module.exports = function (data = {
     if (typeof data.divSecondary !== "string") { data.divSecondary = '#secondary_clock'; }
     if (typeof data.csrfToken !== "string") { data.csrfToken = null; }
     if (typeof data.autoTimezoneCallback !== "function") { data.autoTimezoneCallback = null; }
+    if (typeof data.formatDate !== "string") { `dddd, MMMM Do YYYY`; }
 
     // Timezone
     const tinyclock = {
@@ -21,7 +22,7 @@ module.exports = function (data = {
         },
         timezone: `{{primaryTimezone}}`,
         secondary_timezone: `{{secondaryTimezone}}`,
-        formatDate: `dddd, MMMM Do YYYY`,
+        formatDate: data.formatDate,
         formatTime: `{{clockFormat}}`,
         formatTime2: `{{clockFormat2}}`,
         mainTimezone: `{{mainTimezone}}`,

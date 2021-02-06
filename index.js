@@ -1,45 +1,72 @@
-class timezone_module {
+class expressTimezone {
 
     // Constructor
-    constructor() { return require('./files/constructor').apply(this, arguments); }
+    constructor(app, data = {}, getCsrfToken = function (req, res) {
+        return {
+            now: '',
+            server: ''
+        };
+    }) {
 
-    // Get URLs
-    getUrls() { return this.urls; }
+        // Insert App
+        this.app = app;
+        this.getCsrfToken = getCsrfToken;
 
-    // Set Secondary Timezone
-    setSecondary() { return require('./files/setSecondary').apply(this, arguments); }
+        // Lodash Module
+        const _ = require('lodash');
+        this.data = _.defaultsDeep({}, data, {
 
-    // List Generator
-    getNames() { if (!this.names) { this.names = this.module.tz.names(); } return this.names; }
+            // URLs
+            urls: {
+                setCookie: '/setCookie'
+            },
 
-    // Get Main Timezone
-    getMainTimezone() { return this.main; }
+        });
 
-    // Get Primary Timezone
-    getPrimary() { return this.cfg; }
-    getPrimaryValue() { return this.cfg.actived; }
+        // Complete
+        return this;
 
-    // Get Secondary Timezone
-    getSecondary() { return this.cfgSecondary; }
-    getSecondaryValue() { return this.cfgSecondary.actived; }
+    }
 
-    // Get Clock Config
-    getClockCfg() { return this.clockCfg; }
+    // Insert Express
+    insert() {
+        const tinyThis = this;
+        return (req, res, next) => {
 
-    // UTC
-    convertUTC() { return require('./files/convertUTC').apply(this, arguments); }
-    createUTC() { return require('./files/createUTC').apply(this, arguments); }
-    getUTCValue() { return this.utcValue; }
+            // Timezone Module
+            const genTimezone = require('./api');
 
-    // Set Cookie
-    setCookie() { return require('./files/setCookie'); }
+            // Insert Module
+            req.timezone = new genTimezone(req, this.data);
+            next();
 
-    // Get Client Web
-    getClientWeb() { return require('./files/clientWeb').apply(this, arguments); }
+            // Complete
+            return;
 
-    // Get Moment Module
-    getMoment() { return this.module; }
+        };
+    }
+
+    // Start Module
+    start() {
+
+        // Set Cookie
+        const tinyThis = this;
+        this.app.post(this.data.urls.setCookie, async function (req, res) {
+
+            // Send Request
+            let csrfToken = await tinyThis.getCsrfToken(req, res);
+            req.timezone.setCookie(req, res, csrfToken);
+
+            // Complete
+            return;
+
+        });
+
+        // Complete
+        return;
+
+    }
 
 };
 
-module.exports = timezone_module;
+module.exports = expressTimezone;

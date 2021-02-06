@@ -60,6 +60,9 @@ class expressTimezone {
 
         });
 
+        // Complete
+        return;
+
     }
 
 };

@@ -59,7 +59,7 @@ module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock:
     // Compare Clock
     if (`{{primaryTimezoneisAuto}}` === "true") {
         if (tinyclock.timezone !== tinyclock.newTimezone && csrfToken) {
-            tinyclock.fetch.setCookie('timezone', tinyclock.newTimezone, csrfToken);
+            tinyclock.fetch.setCookie('timezone', tinyclock.newTimezone, data.csrfToken);
         }
     }
 

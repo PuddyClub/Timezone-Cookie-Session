@@ -55,7 +55,7 @@ const timezoneExpress = new tzEx(app, timezoneCfg, function (req, res) {
 app.use(timezoneExpress.insert());
 
 // Get
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     console.log(req.timezone);
     return res.render('test', { timezoneTemplate: req.timezone.getClientWeb() });
 });

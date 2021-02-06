@@ -13,7 +13,7 @@ class timezone_module {
     getNames() { if (!this.names) { this.names = this.module.tz.names(); } return this.names; }
 
     // Get List
-    getList() { return require('./getList').apply(this, arguments); }
+    loadList() { return require('./loadList').apply(this, arguments); }
 
     // Get Main Timezone
     getMainTimezone() { return this.main; }

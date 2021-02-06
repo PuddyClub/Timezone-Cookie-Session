@@ -3,6 +3,7 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // Prepare Express
 const app = express();
@@ -11,7 +12,7 @@ const app = express();
 const timezoneCfg = { urls: { setCookie: '/setCookie' } };
 const tzEx = require('../express');
 const timezoneExpress = new tzEx(app, timezoneCfg, function (req, res) {
-    
+
     // Return csrfToken
     return {
         now: '',
@@ -49,5 +50,9 @@ app.use(express.static(path.join(__dirname, '/public'), {
 // Get
 app.get('*', (req, res) => {
     return res.render('test', { timezoneTemplate: req.timezone.getClientWeb() });
+});
+
+app.listen(5000, function () {
+    console.log('http://localhost:5000');
 });
 

@@ -4,6 +4,8 @@ module.exports = function (data = {}, getCsrfToken = function () {
         server: ''
     };
 }) {
+
+    // Express Callback
     return async (req, res, next) => {
 
         // Timezone Module
@@ -33,4 +35,5 @@ module.exports = function (data = {}, getCsrfToken = function () {
         return;
 
     };
+    
 };

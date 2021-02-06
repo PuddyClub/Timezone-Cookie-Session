@@ -23,17 +23,43 @@ module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock:
             .guess()
     };
 
+    // Fetch
+    tinyclock.fetch = {
+
+        // Set Cookie
+        setCookie: function (type, value, csrfToken) {
+            return new Promise(function(resolve, reject) {
+
+                fetch(tinyclock.urls.setCookie, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ type: type, value: value, csrfToken: csrfToken })
+                })
+                .then(() => {
+                    resolve();
+                    return;
+                })
+                .catch(err => {
+                    reject(err);
+                    return;
+                });
+
+                // Complete
+                return;
+
+            });
+
+        }
+
+    };
+
     // Compare Clock
     if (`{{primaryTimezoneisAuto}}` === "true") {
         if (tinyclock.timezone !== tinyclock.newTimezone && csrfToken) {
-            fetch(tinyclock.urls.setCookie, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ type: 'timezone', value: tinyclock.newTimezone, csrfToken: csrfToken })
-            });
+            tinyclock.fetch.setCookie('timezone', tinyclock.newTimezone, csrfToken);
         }
     }
 

@@ -24,7 +24,7 @@ module.exports = async function (req, res, csrfToken = {
         }
 
         // Set Manual Timezone
-        else if (req.body.type === "manual_timezone") {
+        else if (req.body.type === "primary_timezone") {
 
             req.body.value = req.body.value.substring(0, 100);
 

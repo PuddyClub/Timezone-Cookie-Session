@@ -5,7 +5,7 @@
 
         <title>Test</title>
         <script>
-            var tinyclock = {{timezoneTemplate}}();
+            var tinyclock = {{timezoneTemplate | safe}}();
         </script>
 
     </head>

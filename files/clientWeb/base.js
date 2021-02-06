@@ -1,4 +1,9 @@
-module.exports = function (data = { useSecondaryTimezone: false }) {
+module.exports = function (data = { useSecondaryTimezone: false, jQuerydivClock: false }) {
+
+    // Validate Vars
+    if (typeof data.jQuerydivClock !== "boolean") { data.jQuerydivClock = false; }
+    if (typeof data.divPrimaryClock !== "string") { data.divPrimaryClock = '#primary_clock'; }
+    if (typeof data.divSecondary !== "string") { data.divSecondary = '#secondary_clock'; }
 
     // Timezone
     const tinyclock = {
@@ -44,12 +49,12 @@ module.exports = function (data = { useSecondaryTimezone: false }) {
 
         // Primary Timezone
         tinyclock.clock.timezone = tinyclock.clock.utc.clone().tz(tinyclock.timezone);
-        $('#primary_clock').text(tinyclock.clock.timezone.format(tinyclock.clockFormat));
+        if (data.jQuerydivClock) { $(data.divPrimaryClock).text(tinyclock.clock.timezone.format(tinyclock.clockFormat)); }
 
         // Secondary Timezone
         if (useSecondaryTimezone && tinyclock.timezone !== tinyclock.secondary_timezone) {
             tinyclock.clock.secondary_timezone = tinyclock.clock.utc.clone().tz(tinyclock.secondary_timezone);
-            $('#secondary_clock').text(tinyclock.clock.secondary_timezone.format(tinyclock.clockFormat));
+            if (data.jQuerydivClock) { $(data.divSecondary).text(tinyclock.clock.secondary_timezone.format(tinyclock.clockFormat)); }
         }
 
         // Extra Loops

@@ -4,6 +4,9 @@ module.exports = function (req, data) {
     const _ = require('lodash');
     const tinyCfg = _.defaultsDeep({}, data, {
 
+        // Auto List
+        autoList: false,
+
         // URLs
         urls: {
             setCookie: '/setCookie'
@@ -36,6 +39,9 @@ module.exports = function (req, data) {
         }
 
     });
+
+    // Auto List
+    this.autoList = tinyCfg.autoList;
 
     // URLs
     this.urls = tinyCfg.urls;
@@ -80,7 +86,7 @@ module.exports = function (req, data) {
     }
 
     // Get List
-    this.cfg.list = require('./selectList/timezone').apply(this, [req.session[this.sessionVars.primary_timezone]]);
+    if (this.autoList) { this.cfg.list = require('./selectList/timezone').apply(this, [req.session[this.sessionVars.primary_timezone]]); }
 
     // Prepare Clock
     if (typeof req.session[this.sessionVars.clock24] !== "string" || !req.session[this.sessionVars.clock24] || (req.session[this.sessionVars.clock24] !== "on" && req.session[this.sessionVars.clock24] !== "off")) {
@@ -93,11 +99,15 @@ module.exports = function (req, data) {
 
     }
 
+    // Main Values
     this.clockCfg = {
-        typeOption: require('./selectList/clockType').apply(this, [req.session[this.sessionVars.clock24], tinyCfg.clockLang]),
         type24hours: req.session[this.sessionVars.clock24]
     };
 
+    // Auto List
+    if (this.autoList) { this.clockCfg.typeOption = require('./selectList/clockType').apply(this, [req.session[this.sessionVars.clock24], tinyCfg.clockLang]); }
+
+    // Clock Values
     if (this.clockCfg.type24hours === "off") {
         this.clockCfg.format = "hh:mm:ss a";
         this.clockCfg.format2 = "hh:mm a";

@@ -40,7 +40,7 @@ module.exports = function (req) {
     }
 
     // Get List
-    if (typeof req !== "string") {
+    if (typeof req !== "string" && this.autoList) {
         this.cfgSecondary.list = require('./selectList/timezone').apply(this, [req.session[this.sessionVars.secondary_timezone]]);
     }
 

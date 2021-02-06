@@ -41,7 +41,7 @@ module.exports = function (req) {
 
     // Get List
     if (typeof req !== "string") {
-        this.cfgSecondary.list = require('./selectList/timezone')(req.session[this.sessionVars.secondary_timezone]);
+        this.cfgSecondary.list = require('./selectList/timezone').apply(this, [req.session[this.sessionVars.secondary_timezone]]);
     }
 
     // Complete

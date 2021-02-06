@@ -77,7 +77,7 @@ module.exports = function (req, data) {
     }
 
     // Get List
-    this.cfg.list = require('./selectList/timezone')(req.session[this.sessionVars.primary_timezone]);
+    this.cfg.list = require('./selectList/timezone').apply(this, [req.session[this.sessionVars.primary_timezone]]);
 
     // Prepare Clock
     if (typeof req.session[this.sessionVars.clock24] !== "string" || !req.session[this.sessionVars.clock24] || (req.session[this.sessionVars.clock24] !== "on" && req.session[this.sessionVars.clock24] !== "off")) {
@@ -85,7 +85,7 @@ module.exports = function (req, data) {
     }
 
     this.clockCfg = {
-        typeOption: require('./selectList/clockType')(req.session[this.sessionVars.clock24], tinyCfg.clockLang),
+        typeOption: require('./selectList/clockType').apply(this, [req.session[this.sessionVars.clock24], tinyCfg.clockLang]),
         type24hours: req.session[this.sessionVars.clock24]
     };
 

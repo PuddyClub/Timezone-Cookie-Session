@@ -10,7 +10,7 @@ class timezone_module {
     setSecondary() { return require('./files/setSecondary').apply(this, arguments); }
 
     // List Generator
-    getNames() { if (!this.names) { this.names = this.tz.names(); } return this.names; }
+    getNames() { if (!this.names) { this.names = this.module.tz.names(); } return this.names; }
 
     // Get Main Timezone
     getMainTimezone() { return this.main; }

@@ -57,17 +57,12 @@ app.use(timezoneExpress.insert());
 // Get
 app.get('/', (req, res) => {
 
+    console.group(new Date().toString());
     console.log(req.session);
-
-    const list = req.timezone.loadList(req, {
-        primaryTimezone: false,
-        secondaryTimezone: false,
-        clockCfg: false
-    });
-
     console.log(req.timezone);
+    console.groupEnd();
 
-    return res.render('test', { timezoneTemplate: req.timezone.getClientWeb() });
+    return res.render('test', { timezone: req.timezone, timezoneTemplate: req.timezone.getClientWeb() });
 });
 
 // Start Timezone Module

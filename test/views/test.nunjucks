@@ -14,7 +14,164 @@
 
     <body>
 
-        Mio!
+        {% if timezone.cfg.actived === timezone.cfgSecondary.actived %}
+
+            <div class="mb-2">
+                <i class="fas fa-globe"></i> Website Timezone: {{timezone.cfg.info}}
+            </div>
+
+            {# Clock #}
+            <div class="mb-2" id="primary_clock">??:??</div>
+
+        {% endif %}
+
+        {# Row #}
+        <div class="row">
+
+            {# Primary #}
+            <div class="col-md-6">
+
+                {% if timezone.cfg.actived !== timezone.cfgSecondary.actived %}
+
+                    <div class="mb-2">
+                        <i class="fas fa-globe"></i> Website Timezone: {{timezone.cfg.info}}
+                    </div>
+
+                    {# Clock #}
+                    <div class="mb-2" id="primary_clock">??:??</div>
+
+                {% endif %}
+
+                {# TImezone #}
+                <select class="custom-select mx-2 w-auto" id="select_timezone">
+                    <option value="auto">Auto Detect Timezone</option>
+                    {% for item in timezone.cfg.list %}
+                        {% if item.selected %}
+                            <option value="{{ item.value }}" selected>{{ item.name }}</option>
+                        {% else %}
+                            <option value="{{ item.value }}">{{ item.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+
+                <script>
+                    $('#select_timezone').change(function () {
+
+                        const tinyvalue = $(this).val();
+                        if (tinyvalue) {
+
+                            $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
+                            tinyclock
+                                .fetch
+                                .setCookie('primary_timezone', tinyvalue, csrfToken)
+                                .then(() => {
+                                    location.reload();
+                                })
+                                .catch(err => {
+                                    $.LoadingOverlay("hide");
+                                    alert(err.message);
+                                });
+
+                        }
+
+                    });
+                </script>
+
+            </div>
+
+            {# Secondary #}
+            <div class="col-md-6">
+
+                {% if timezone.cfg.actived !== timezone.cfgSecondary.actived %}
+
+                    <div class="mb-2">
+                        <i class="fas fa-globe"></i> Secondary Timezone: {{timezone.cfgSecondary.info}}
+                    </div>
+
+                    {# Clock #}
+                    <div class="mb-2" id="secondary_clock">??:??</div>
+
+                {% endif %}
+
+                {# Convert Timezone #}
+                <select class="custom-select mx-2 w-auto" id="select_secundary_timezone">
+                    <option value="auto">Auto Detect Secondary Timezone</option>
+                    {% for item in timezone.cfgSecondary.list %}
+                        {% if item.selected %}
+                            <option value="{{ item.value }}" selected>{{ item.name }}</option>
+                        {% else %}
+                            <option value="{{ item.value }}">{{ item.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+
+                <script>
+                    $('#select_secundary_timezone').change(function () {
+
+                        const tinyvalue = $(this).val();
+                        if (tinyvalue) {
+
+                            $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
+                            tinyclock
+                                .fetch
+                                .setCookie('secondary_timezone', tinyvalue, csrfToken)
+                                .then(() => {
+                                    location.reload();
+                                })
+                                .catch(err => {
+                                    $.LoadingOverlay("hide");
+                                    alert(err.message);
+                                });
+
+                        }
+
+                    });
+                </script>
+
+            </div>
+
+        </div>
+
+        {# 24 Clock #}
+
+        <div>
+
+            <select class="custom-select mx-2 w-auto" id="choose_clock24">
+                <option value="">Choose a Clock Type</option>
+                {% for item in timezone.clockCfg.typeOption %}
+                    {% if item.selected %}
+                        <option value="{{ item.value }}" selected>{{ item.name }}</option>
+                    {% else %}
+                        <option value="{{ item.value }}">{{ item.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <script>
+
+                $('#choose_clock24').change(function () {
+
+                    const tinyvalue = $(this).val();
+                    if (tinyvalue) {
+
+                        $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
+                        tinyclock
+                            .fetch
+                            .setCookie('clock24', tinyvalue, csrfToken)
+                            .then(() => {
+                                location.reload();
+                            })
+                            .catch(err => {
+                                $.LoadingOverlay("hide");
+                                alert(err.message);
+                            });
+
+                    }
+
+                });
+            </script>
+
+        </div>
 
     </body>
 

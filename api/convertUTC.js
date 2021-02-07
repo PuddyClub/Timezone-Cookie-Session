@@ -14,7 +14,7 @@ module.exports = function (data) {
         allowSecondary: true,
 
         // Time Format
-        timeFormat: 'dddd, MMMM Do YYYY, ',
+        timeFormat: `dddd, MMMM Do YYYY, ${this.clockCfg.format2}`,
 
         // Get Unix
         getUnix: true,
@@ -43,10 +43,13 @@ module.exports = function (data) {
 
     // Format
     if (tinyCfg.getFormat) {
-        const timeFormatResult = `${tinyCfg.timeFormat}${this.clockCfg.format2}`;
+        const timeFormatResult = tinyCfg.timeFormat;
         result.time = result.time.format(timeFormatResult);
         if (existSecondary) { result.secondary_time = result.secondary_time.format(timeFormatResult); }
     }
+
+    // Get Date Data
+    
 
     // Complete
     return result;

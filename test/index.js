@@ -77,6 +77,9 @@ app.all('/', bodyParseN, (req, res) => {
             timezone: 'America/Sao_Paulo'
         };
 
+        // Post
+        result.body = testValue;
+
         // Format
         testValue.type = 'format';
         result.format = req.timezone.createUTC(testValue);

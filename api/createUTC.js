@@ -48,30 +48,16 @@ module.exports = function (body) {
 
     // Complete
 
+    // Convert to UTC
+    dateResult.tz(this.utcValue);
+
+    // Normal
+    if (tinyCfg.type !== "format") {
+        return dateResult[tinyCfg.type]();
+    }
     // Format
-    if (tinyCfg.type === "format") {
-
-        // Convert to UTC
-        dateResult.tz(this.utcValue);
-
-        // Complete
+    else {
         if (!tinyCfg.formatValue) { return dateResult.format(); } else { dateResult.format(tinyCfg.formatValue); }
-
     }
-
-    // to Date
-    else if (tinyCfg.type === "toDate" || tinyCfg.type === "calendar") {
-
-        // Convert to UTC
-        dateResult.tz(this.utcValue);
-
-        // Complete
-        return dateResult.toDate();
-
-    }
-    
-
-    // Other
-    else { return dateResult[tinyCfg.type](); }
 
 };

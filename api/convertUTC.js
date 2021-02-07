@@ -35,16 +35,15 @@ module.exports = function (data) {
     if (existSecondary) { result.secondary_time = result.moment.clone().tz(this.cfgSecondary.actived); }
     result.moment.tz(this.cfg.actived);
 
+    // Moment Secondary
+    if (existSecondary) { result.secondary_moment = result.secondary_time; }
+
     // Format
     if (tinyCfg.getFormat) {
         const timeFormatResult = tinyCfg.timeFormat;
         result.time = result.moment.format(timeFormatResult);
         if (existSecondary) { result.secondary_time = result.secondary_time.format(timeFormatResult); }
     }
-
-    // Moment Secondary
-    if (existSecondary) { result.secondary_moment = result.secondary_time; }
-
 
     // Complete
     return result;

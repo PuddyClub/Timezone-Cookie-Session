@@ -1,33 +1,34 @@
 // Base Data
-let baseData = null;
+let baseData = {};
 
 module.exports = function () {
 
-    // Cache Value
-    if (typeof baseData !== "string") {
-
-        // Remove Module
-        const lodash = `const _ = require('lodash');`;
-
-        // Convert to String
-        baseData = require('./base').toString()
-        .replace('CONVERTUTC', require('../convertUTC').toString().replace(lodash, ''))
-        .replace('CREATEUTC', require('../createUTC').toString().replace(lodash, ''));
-    
-    }
+    // Prepare Cache
+    const lodash = `const _ = require('lodash');`;
+    if (typeof baseData.convertUTC !== "string") { baseData.convertUTC = require('../convertUTC').toString().replace(lodash, ''); }
+    if (typeof baseData.createUTC !== "string") { baseData.createUTC = require('../createUTC').toString().replace(lodash, ''); }
+    if (typeof baseData.base !== "string") { baseData.base = require('./base').toString(); }
 
     // Return Data
-    return baseData
-        .replace('{{momentjsLang}}', this.locale)
-        .replace('{{setCookieURL}}', this.urls.setCookie)
-        .replace('{{utcValue}}', this.utcValue)
-        .replace('{{primaryTimezone}}', this.cfg.actived)
-        .replace('{{secondaryTimezone}}', this.cfgSecondary.actived)
-        .replace('{{clockFormat}}', this.clockCfg.format)
-        .replace('{{clockFormat2}}', this.clockCfg.format2)
-        .replace('{{mainPrimaryTimezone}}', this.main.primary)
-        .replace('{{mainSecondaryTimezone}}', this.main.secondary)
-        .replace('{{primaryTimezoneisAuto}}', this.cfg.auto.toString())
-        .replace('{{type24hoursOn}}', (this.clockCfg.type24hours === "on").toString());
+    return `
+        const tinyClock = {
+            urls: {
+                setCookie: \`${this.urls.setCookie}\`
+            },
+            locale: \`${this.locale}\`,
+            timezone: \`${this.cfg.actived}\`,
+            secondary_timezone: \`${this.cfgSecondary.actived}\`,
+            formatTime: \`${this.clockCfg.format}\`,
+            formatTime2: \`${this.clockCfg.format2}\`,
+            type24hoursOn: ${(this.clockCfg.type24hours === "on").toString()},
+            primaryIsAuto: ${this.cfg.auto.toString()},
+            secondaryIsAuto: ${this.secondaryCfg.auto.toString()},
+            mainTimezone: {
+                primary: \`${this.main.primary}\`,
+                secondary: \`${this.main.secondary}\`
+            },
+            utcValue: \`${this.utcValue}\`
+        };
+    `;
 
 };

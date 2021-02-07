@@ -69,17 +69,24 @@ class expressTimezone {
         });
 
         // Files
-        const readFile = function (file, req, res, next) {
+        const readFile = function (file, date, res, next) {
 
             // Is String
             if (typeof file === "string") {
 
                 // File Type
-                res.setHeader('Content-Type', 'text/javascript');
+                res.setHeader('Content-Type', 'application/javascript');
+                res.setHeader('Accept-Ranges', 'bytes');
+                res.setHeader('Access-Control-Allow-Origin', 'same');
+                res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+                res.setHeader('X-Content-Type-Options', 'nosniff');
+                res.setHeader('Timing-Allow-Origin', 'same');
+                res.setHeader('Last-Modified', require('moment-timezone')(date).toString());
 
                 // Cache Control
                 if (typeof tinyThis.data.fileMaxAge === "number") {
                     res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}, s-maxage=${tinyThis.data.fileMaxAge}`);
+                    res.set('Strict-Transport-Security', `max-age=${tinyThis.data.fileMaxAge / 2}`);
                 }
 
                 // File Size
@@ -100,17 +107,26 @@ class expressTimezone {
 
         // Base
         this.app.get('/tinyClock/base.js', function (req, res, next) {
-            return readFile('tinyClock.start = ' + require('./api/clientWeb')(false).base + ';', req, res, next);
+            return readFile(
+                'tinyClock.start = ' + require('./api/clientWeb')(false).base + ';',
+                '', res, next
+            );
         });
 
         // Create UTC
         this.app.get('/tinyClock/createUTC.js', function (req, res, next) {
-            return readFile('tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';', req, res, next);
+            return readFile(
+                'tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';',
+                '', res, next
+            );
         });
 
         // Convert UTC
         this.app.get('/tinyClock/convertUTC.js', function (req, res, next) {
-            return readFile('tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';', req, res, next);
+            return readFile(
+                'tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';',
+                '', res, next
+            );
         });
 
         // Complete

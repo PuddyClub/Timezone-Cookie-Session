@@ -16,7 +16,7 @@ module.exports = function (body) {
         // Timezone Value
         timezone: this.utcValue,
 
-        // Final Value Result (toDate or toString or valueOf or format)
+        // Final Value Result
         type: 'toDate'
 
     });
@@ -57,7 +57,7 @@ module.exports = function (body) {
     }
     // Format
     else {
-        if (!tinyCfg.formatValue) { return dateResult.format(); } else { dateResult.format(tinyCfg.formatValue); }
+        if (!tinyCfg.formatValue) { return dateResult[tinyCfg.type](); } else { dateResult[tinyCfg.type](tinyCfg.formatValue); }
     }
 
 };

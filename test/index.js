@@ -80,6 +80,22 @@ app.all('/', bodyParseN, (req, res) => {
         // Post
         result.body = testValue;
 
+        // to JSON
+        testValue.type = 'toObject';
+        result.object = req.timezone.createUTC(testValue);
+
+        // to Array
+        testValue.type = 'toArray';
+        result.array = req.timezone.createUTC(testValue);
+
+        // to JSON
+        testValue.type = 'toJSON';
+        result.json = req.timezone.createUTC(testValue);
+
+        // to ISO String
+        testValue.type = 'toISOString';
+        result.ISOString = req.timezone.createUTC(testValue);
+
         // From Now
         testValue.type = 'fromNow';
         result.fromNow = req.timezone.createUTC(testValue);

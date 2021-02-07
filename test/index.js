@@ -55,11 +55,23 @@ const timezoneExpress = new tzEx(app, { urls: { setCookie: '/setCookie' }, clock
 app.use(timezoneExpress.insert());
 
 // Homepage
-app.all('/', (req, res) => {
+app.all('/', bodyParseN, (req, res) => {
 
+    // Console Result
     console.group(new Date().toString());
+    
+    // Req
     console.log(req.session);
     console.log(req.timezone);
+
+    // Post
+    if(req.method === "POST") {
+
+        // Body
+        console.log(req.body);
+
+    }
+
     console.groupEnd();
 
     return res.render('test', { timezone: req.timezone, timezoneTemplate: req.timezone.getClientWeb() });

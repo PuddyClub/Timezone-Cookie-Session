@@ -102,6 +102,21 @@ module.exports = function (data = {
     tinyClock.is24hours = null;
     if (tinyClock.type24hoursOn === "true") { tinyClock.is24hours = true; } else { tinyClock.is24hours = false; }
 
+    // The Timezone
+    tinyClock.loopValues = {
+
+        // Primary
+        primary: { value: tinyClock.timezone },
+
+        // Secondary
+        secondary: { value: tinyClock.secondary_timezone }
+
+    };
+
+    // The Info
+    if (tinyClock.timezone) { tinyClock.loopValues.primary.info = tinyClock.timezone.replace(/\_/g, ' ') };
+    if (tinyClock.secondary_timezone) { tinyClock.loopValues.primary.info = tinyClock.secondary_timezone.replace(/\_/g, ' '); }
+
     // Clock Loop
     tinyClock.clockFormat = tinyClock.formatDate + ', ' + tinyClock.formatTime;
     tinyClock.loop = function () {
@@ -109,23 +124,6 @@ module.exports = function (data = {
         // Prepare UTC
         tinyClock.clock = {
             utc: moment.tz(tinyClock.utcValue)
-        };
-
-        // The Timezone
-        tinyClock.loopValues = {
-            
-            // Primary
-            primary: {
-                value: tinyClock.timezone,
-                info: tinyClock.timezone.replace(/\_/g, ' ')
-            },
-
-            // Secondary
-            secondary: {
-                value: tinyClock.secondary_timezone,
-                info: tinyClock.secondary_timezone.replace(/\_/g, ' ')
-            }
-        
         };
 
         // Fix Primary

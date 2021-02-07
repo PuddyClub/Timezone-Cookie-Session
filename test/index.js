@@ -85,6 +85,10 @@ app.all('/', bodyParseN, (req, res) => {
         testValue.type = 'toDate';
         result.toDate = req.timezone.createUTC(testValue);
 
+        // Calendar
+        testValue.type = 'calendar';
+        result.calendar = req.timezone.createUTC(testValue);
+
         // String
         testValue.type = 'toString';
         result.toString = req.timezone.createUTC(testValue);

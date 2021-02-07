@@ -60,7 +60,7 @@ module.exports = function (body) {
     }
 
     // to Date
-    else if (tinyCfg.type === "toDate") {
+    else if (tinyCfg.type === "toDate" || tinyCfg.type === "calendar") {
 
         // Convert to UTC
         dateResult.tz(this.utcValue);
@@ -69,6 +69,7 @@ module.exports = function (body) {
         return dateResult.toDate();
 
     }
+    
 
     // Other
     else { return dateResult[tinyCfg.type](); }

@@ -36,6 +36,21 @@ module.exports = function (data = {
             .guess()
     };
 
+    // Prepare Tiny Clock This
+    const tinyClockThis = {
+
+    };
+
+    // Convert UTC
+    tinyclock.convertUTC = function () {
+        return CONVERTUTC.apply(tinyClockThis, arguments);
+    }
+
+    // Create UTC
+    tinyclock.createUTC = function () {
+        return CREATEUTC.apply(tinyClockThis, arguments);
+    };
+
     // Set Moment Locale
     moment.locale(tinyclock.locale);
 

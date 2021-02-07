@@ -5,7 +5,15 @@ module.exports = function () {
 
     // Cache Value
     if (typeof baseData !== "string") {
-        baseData = require('./base').toString();
+
+        // Remove Module
+        const lodash = `const _ = require('lodash');`;
+
+        // Convert to String
+        baseData = require('./base').toString()
+        .replace('CONVERTUTC', require('../convertUTC').toString().replace(lodash, ''))
+        .replace('CREATEUTC', require('../createUTC').toString().replace(lodash, ''));
+    
     }
 
     // Return Data

@@ -9,6 +9,9 @@ module.exports = function () {
     if (typeof baseData.createUTC !== "string") { baseData.createUTC = require('../createUTC').toString().replace(lodash, ''); }
     if (typeof baseData.base !== "string") { baseData.base = require('./base').toString(); }
 
+    // Files
+    this.files = baseData;
+
     // Return Data
     return `
         var tinyClock = {

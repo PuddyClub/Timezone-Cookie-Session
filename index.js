@@ -71,8 +71,6 @@ class expressTimezone {
         // Files
         const readFile = function (file, date, timezone, res, next) {
 
-            console.log('mio!');
-
             // Is String
             if (typeof file === "string") {
 

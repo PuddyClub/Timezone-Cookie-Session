@@ -71,24 +71,34 @@ class expressTimezone {
         // Files
         const readFile = function (file, date, timezone, res, next) {
 
+            console.log('mio!');
+
             // Is String
             if (typeof file === "string") {
 
+                // Moment
+                const moment = require('moment-timezone');
+
                 // File Type
                 res.setHeader('Content-Type', 'application/javascript');
-                res.setHeader('Content-MD5', Buffer.from(require('md5')(file)).toString('base64'));
                 res.setHeader('Accept-Ranges', 'bytes');
                 res.setHeader('Access-Control-Allow-Origin', 'same-origin');
                 res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
                 res.setHeader('X-Content-Type-Options', 'nosniff');
                 res.setHeader('X-Frame-Options', 'SAMEORIGIN');
                 res.setHeader('Timing-Allow-Origin', 'same-origin');
-                res.setHeader('Last-Modified', require('moment-timezone').tz(date, timezone).toString());
                 res.removeHeader('Connection');
                 res.removeHeader('X-Powered-By');
 
+                // MD5
+                res.setHeader('Content-MD5', Buffer.from(require('md5')(file)).toString('base64'));
+
+                // Time
+                res.setHeader('Last-Modified', moment.tz(date, timezone).toString());
+
                 // Cache Control
                 if (typeof tinyThis.data.fileMaxAge === "number") {
+                    res.setHeader('Expires', moment.tz('UTC').add(tinyThis.data.fileMaxAge, 'seconds').toString());
                     res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}`);
                 }
 

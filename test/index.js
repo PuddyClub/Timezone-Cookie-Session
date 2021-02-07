@@ -28,13 +28,20 @@ nunjucks.configure(path.join(__dirname, 'views'), {
 app.set('view engine', 'nunjucks');
 
 // Static Files
+const maxAge = '2592000000';
 app.use(express.static(path.join(__dirname, '/public'), {
-    maxAge: '2592000000' // uses milliseconds per docs
+    maxAge: maxAge // uses milliseconds per docs
 }));
 
 // Timezone Module
 const tzEx = require('../index');
-const timezoneExpress = new tzEx(app, { urls: { setCookie: '/setCookie' }, clock24: true, autoList: true, setSecondary: true }, function (req, res) {
+const timezoneExpress = new tzEx(app, {
+     urls: { setCookie: '/setCookie' }, 
+     clock24: true, 
+     autoList: true, 
+     setSecondary: true,
+     fileMaxAge: maxAge
+}, function (req, res) {
     return new Promise(function (resolve) {
         bodyParseN(req, res, () => {
 

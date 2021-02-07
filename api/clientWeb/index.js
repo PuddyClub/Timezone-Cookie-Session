@@ -11,7 +11,7 @@ module.exports = function () {
 
     // Return Data
     return `
-        const tinyClock = {
+        var tinyClock = {
             urls: {
                 setCookie: \`${this.urls.setCookie}\`
             },

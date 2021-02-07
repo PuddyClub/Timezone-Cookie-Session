@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/TinyPudding/Timezone-Lib#readme",
   "dependencies": {
-    "@tinypudding/puddy-lib": "^1.1.11",
+    "@tinypudding/puddy-lib": "^1.1.13",
     "byte-length": "^1.0.2",
     "lodash": "^4.17.20",
     "md5": "^2.3.0",

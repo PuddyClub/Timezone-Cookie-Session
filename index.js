@@ -69,74 +69,44 @@ class expressTimezone {
         });
 
         // Files
-        const readFile = function (file, date, timezone, res, next) {
-
-            // Is String
-            if (typeof file === "string") {
-
-                // Moment
-                const moment = require('moment-timezone');
-
-                // File Type
-                res.setHeader('Content-Type', 'application/javascript');
-                res.setHeader('Accept-Ranges', 'bytes');
-                res.setHeader('Access-Control-Allow-Origin', 'same-origin');
-                res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
-                res.setHeader('X-Content-Type-Options', 'nosniff');
-                res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-                res.setHeader('Timing-Allow-Origin', 'same-origin');
-                res.removeHeader('Connection');
-                res.removeHeader('X-Powered-By');
-
-                // MD5
-                res.setHeader('Content-MD5', Buffer.from(require('md5')(file)).toString('base64'));
-
-                // Time
-                res.setHeader('Last-Modified', moment.tz(date, timezone).toString());
-
-                // Cache Control
-                if (typeof tinyThis.data.fileMaxAge === "number") {
-                    res.setHeader('Expires', moment.tz('UTC').add(tinyThis.data.fileMaxAge, 'seconds').toString());
-                    res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}`);
-                }
-
-                // File Size
-                res.setHeader('Content-Length', require('byte-length').byteLength(file));
-
-                // Send FIle
-                res.send(file);
-
-            }
-
-            // Nope
-            else { next(); }
-
-            // Complete
-            return;
-
-        };
+        const readFile = require('@tinypudding/puddy-lib/http/fileCache');
 
         // Base
         this.app.get('/tinyClock/base.js', function (req, res, next) {
             return readFile(
-                'tinyClock.start = ' + require('./api/clientWeb')(false).base + ';',
-                { year: 2021, month: 2, day: 7, hour: 0, minute: 18 }, 'America/Sao_Paulo', res, next
+                res, next,
+                {
+                    file: 'tinyClock.start = ' + require('./api/clientWeb')(false).base + ';',
+                    date: { year: 2021, month: 2, day: 7, hour: 0, minute: 18 },
+                    timezone: 'America/Sao_Paulo',
+                    fileMaxAge: tinyThis.data.fileMaxAge
+                } 
             );
         });
 
         // Create UTC
         this.app.get('/tinyClock/createUTC.js', function (req, res, next) {
             return readFile(
-                'tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';',
-                { year: 2021, month: 2, day: 7, hour: 0, minute: 5 }, 'America/Sao_Paulo', res, next
+                res, next,
+                {
+                    file: 'tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';',
+                    date: { year: 2021, month: 2, day: 7, hour: 0, minute: 5 },
+                    timezone: 'America/Sao_Paulo',
+                    fileMaxAge: tinyThis.data.fileMaxAge
+                }
             );
         });
 
         // Convert UTC
         this.app.get('/tinyClock/convertUTC.js', function (req, res, next) {
             return readFile(
-                'tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';',
-                { year: 2021, month: 2, day: 7, hour: 0, minute: 10 }, 'America/Sao_Paulo', res, next
+                res, next,
+                {
+                    file: 'tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';',
+                    date: { year: 2021, month: 2, day: 7, hour: 0, minute: 10 },
+                    timezone: 'America/Sao_Paulo',
+                    fileMaxAge: tinyThis.data.fileMaxAge
+                }
             );
         });
 

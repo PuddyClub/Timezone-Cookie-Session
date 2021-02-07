@@ -28,10 +28,10 @@ module.exports = function (body) {
     try {
 
         // Set New Date
-        const newDate = this.module.tz(new Date(tinyCfg.date + " " + tinyCfg.time), tinyCfg.timezone);
+        const newDate = this.moment.tz(new Date(tinyCfg.date + " " + tinyCfg.time), tinyCfg.timezone);
 
         // Set Values
-        dateResult = this.module().tz(tinyCfg.timezone);
+        dateResult = this.moment().tz(tinyCfg.timezone);
         dateResult.set('year', newDate.year());
         dateResult.set('month', newDate.month());
         dateResult.set('date', newDate.date());
@@ -43,7 +43,7 @@ module.exports = function (body) {
 
     // Fail
     catch (err) {
-        dateResult = this.module();
+        dateResult = this.moment();
     }
 
     // Complete

@@ -10,7 +10,7 @@ class timezone_module {
     setSecondary() { return require('./setSecondary').apply(this, arguments); }
 
     // List Generator
-    getNames() { if (!this.names) { this.names = this.module.tz.names(); } return this.names; }
+    getNames() { if (!this.names) { this.names = this.moment.tz.names(); } return this.names; }
 
     // Get List
     loadList() { return require('./loadList').apply(this, arguments); }
@@ -41,7 +41,7 @@ class timezone_module {
     getClientWeb() { return require('./clientWeb').apply(this, arguments); }
 
     // Get Moment Module
-    getMoment() { return this.module; }
+    getMoment() { return this.moment; }
 
     // Get File
     getFile(item) { if (typeof this.files[item] === "string") { return this.files[item]; } else { return ''; } }

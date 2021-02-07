@@ -117,7 +117,7 @@ module.exports = function (data = {
     // Prepare Tiny Clock This
     const tinyClockThis = {
         utcValue: tinyClock.utcValue,
-        module: moment,
+        moment: moment,
         cfg: { actived: tinyClock.loopValues.primary.value },
         cfgSecondary: { actived: tinyClock.loopValues.secondary.value },
         clockCfg: { format2: tinyClock.formatTime2 }

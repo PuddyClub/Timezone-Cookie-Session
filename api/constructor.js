@@ -47,7 +47,7 @@ module.exports = function (req, data) {
     });
 
     // Prepare Module
-    this.module = require('moment-timezone');
+    this.moment = require('moment-timezone');
 
     // Fix Main Timezone
     if (typeof tinyCfg.mainTimezone === "string") {
@@ -62,7 +62,7 @@ module.exports = function (req, data) {
 
     // UTC Value
     this.utcValue = tinyCfg.utcValue;
-    this.module.tz.setDefault(this.utcValue);
+    this.moment.tz.setDefault(this.utcValue);
 
     // Main Timezone
     this.main = tinyCfg.mainTimezone;
@@ -71,7 +71,7 @@ module.exports = function (req, data) {
     this.sessionVars = tinyCfg.sessionVars;
 
     // Set Language
-    this.module.locale(tinyCfg.locale);
+    this.moment.locale(tinyCfg.locale);
     this.locale = tinyCfg.locale;
 
     // Set Timezone

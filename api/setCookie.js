@@ -17,7 +17,7 @@ module.exports = async function (req, res, csrfToken = {
 
             req.body.value = req.body.value.substring(0, 100);
 
-            if (this.module.tz.zone(req.body.value)) {
+            if (this.moment.tz.zone(req.body.value)) {
                 req.session[this.sessionVars.timezone] = req.body.value;
             }
 
@@ -28,7 +28,7 @@ module.exports = async function (req, res, csrfToken = {
 
             req.body.value = req.body.value.substring(0, 100);
 
-            if (this.module.tz.zone(req.body.value)) {
+            if (this.moment.tz.zone(req.body.value)) {
                 req.session[this.sessionVars.primary_timezone] = req.body.value;
             } else {
                 req.session[this.sessionVars.primary_timezone] = 'auto';
@@ -41,7 +41,7 @@ module.exports = async function (req, res, csrfToken = {
 
             req.body.value = req.body.value.substring(0, 100);
 
-            if (this.module.tz.zone(req.body.value)) {
+            if (this.moment.tz.zone(req.body.value)) {
                 req.session[this.sessionVars.secondary_timezone] = req.body.value;
             } else {
                 req.session[this.sessionVars.secondary_timezone] = 'auto';

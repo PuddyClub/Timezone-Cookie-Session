@@ -28,7 +28,7 @@ module.exports = function (data) {
     const existSecondary = (tinyCfg.allowSecondary && this.cfgSecondary);
 
     // Convert Clock Data
-    result.moment = this.module.tz(result.vanilla, tinyCfg.timezone);
+    result.moment = this.moment.tz(result.vanilla, tinyCfg.timezone);
     result.original = result.moment.clone();
 
     // Set Timezone

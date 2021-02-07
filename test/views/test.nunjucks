@@ -12,10 +12,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data.js" integrity="sha512-IDSLgD053BknlW9X/ynlGZBcfDdnirlQEutld9AV3u58rKCtnEZqC3xTNnakjBJv18xsRyVPrqAP3WW/kZ9fqQ==" crossorigin="anonymous"></script>
 
-        <script>
-            {{timezoneTemplate | safe}};
-        </script>
-        
+        {{timezoneTemplate | safe}}
         <script src="/tinyClock/base.js"></script>
         <script src="/tinyClock/createUTC.js"></script>
         <script src="/tinyClock/convertUTC.js"></script>

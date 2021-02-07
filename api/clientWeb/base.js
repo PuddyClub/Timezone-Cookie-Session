@@ -111,13 +111,42 @@ module.exports = function (data = {
             utc: moment.tz(tinyClock.utcValue)
         };
 
+        // The Timezone
+        tinyClock.loopValues = {
+            
+            // Primary
+            primary: {
+                value: tinyClock.timezone,
+                info: tinyClock.timezone.replace(/\_/g, ' ')
+            },
+
+            // Secondary
+            secondary: {
+                value: tinyClock.secondary_timezone,
+                info: tinyClock.secondary_timezone.replace(/\_/g, ' ')
+            }
+        
+        };
+
+        // Fix Primary
+        if (typeof tinyClock.loopValues.primary.value !== "string") {
+            tinyClock.loopValues.primary.value = tinyClock.newTimezone;
+            tinyClock.loopValues.primary.info = tinyClock.newTimezone.replace(/\_/g, ' ');
+        }
+
+        // Fix Secondary
+        if (typeof tinyClock.loopValues.secondary.value !== "string") {
+            tinyClock.loopValues.secondary.value = tinyClock.newTimezone;
+            tinyClock.loopValues.secondary.info = tinyClock.newTimezone.replace(/\_/g, ' ');
+        }
+
         // Primary Timezone
-        tinyClock.clock.timezone = tinyClock.clock.utc.clone().tz(tinyClock.timezone);
+        tinyClock.clock.timezone = tinyClock.clock.utc.clone().tz(tinyClock.loopValues.primary.value);
         if (data.jQuerydivClock) { $(data.divPrimaryClock).text(tinyClock.clock.timezone.format(tinyClock.clockFormat)); }
 
         // Secondary Timezone
-        if (data.useSecondaryTimezone && tinyClock.timezone !== tinyClock.secondary_timezone) {
-            tinyClock.clock.secondary_timezone = tinyClock.clock.utc.clone().tz(tinyClock.secondary_timezone);
+        if (data.useSecondaryTimezone && tinyClock.loopValues.primary.value !== tinyClock.loopValues.secondary.value) {
+            tinyClock.clock.secondary_timezone = tinyClock.clock.utc.clone().tz(tinyClock.loopValues.secondary.value);
             if (data.jQuerydivClock) { $(data.divSecondary).text(tinyClock.clock.secondary_timezone.format(tinyClock.clockFormat)); }
         }
 

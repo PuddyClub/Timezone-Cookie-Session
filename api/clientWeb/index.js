@@ -15,15 +15,26 @@ module.exports = function (isThis = true) {
         // Files
         this.files = baseData;
 
+        // The Timezone
+        let timezone = '';
+        let secondary_timezone = '';
+        if(this.cfg.actived){
+            timezone = `tinyClock.timezone = \`${this.cfg.actived}\`,`;
+        }
+
+        if(this.cfg.cfgSecondary){
+            secondary_timezone = `tinyClock.secondary_timezone = \`${this.cfgSecondary.actived}\`,`;
+        }
+
         // Return Data
         return `
+        <script id="tinyClock">
+        
         var tinyClock = {
             urls: {
                 setCookie: \`${this.urls.setCookie}\`
             },
             locale: \`${this.locale}\`,
-            timezone: \`${this.cfg.actived}\`,
-            secondary_timezone: \`${this.cfgSecondary.actived}\`,
             formatTime: \`${this.clockCfg.format}\`,
             formatTime2: \`${this.clockCfg.format2}\`,
             type24hoursOn: ${(this.clockCfg.type24hours === "on").toString()},
@@ -35,6 +46,11 @@ module.exports = function (isThis = true) {
             },
             utcValue: \`${this.utcValue}\`
         };
+
+        ${timezone}
+        ${secondary_timezone}
+
+        </script>
     `;
 
     }

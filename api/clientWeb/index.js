@@ -1,7 +1,7 @@
 // Base Data
 let baseData = {};
 
-module.exports = function () {
+module.exports = function (isThis = true) {
 
     // Prepare Cache
     const lodash = `const _ = require('lodash');`;
@@ -9,11 +9,14 @@ module.exports = function () {
     if (typeof baseData.createUTC !== "string") { baseData.createUTC = require('../createUTC').toString().replace(lodash, ''); }
     if (typeof baseData.base !== "string") { baseData.base = require('./base').toString(); }
 
-    // Files
-    this.files = baseData;
+    // Exist This
+    if (isThis) {
 
-    // Return Data
-    return `
+        // Files
+        this.files = baseData;
+
+        // Return Data
+        return `
         var tinyClock = {
             urls: {
                 setCookie: \`${this.urls.setCookie}\`
@@ -25,7 +28,7 @@ module.exports = function () {
             formatTime2: \`${this.clockCfg.format2}\`,
             type24hoursOn: ${(this.clockCfg.type24hours === "on").toString()},
             primaryIsAuto: ${this.cfg.auto.toString()},
-            secondaryIsAuto: ${this.secondaryCfg.auto.toString()},
+            secondaryIsAuto: ${this.cfgSecondary.auto.toString()},
             mainTimezone: {
                 primary: \`${this.main.primary}\`,
                 secondary: \`${this.main.secondary}\`
@@ -33,5 +36,10 @@ module.exports = function () {
             utcValue: \`${this.utcValue}\`
         };
     `;
+
+    }
+
+    // Nope
+    else { return baseData; }
 
 };

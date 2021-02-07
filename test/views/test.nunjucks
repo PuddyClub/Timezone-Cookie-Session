@@ -88,7 +88,7 @@
                         if (tinyvalue) {
 
                             $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
-                            tinyclock
+                            tinyClock
                                 .fetch
                                 .setCookie('primary_timezone', tinyvalue, csrfToken)
                                 .then(() => {
@@ -139,7 +139,7 @@
                         if (tinyvalue) {
 
                             $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
-                            tinyclock
+                            tinyClock
                                 .fetch
                                 .setCookie('secondary_timezone', tinyvalue, csrfToken)
                                 .then(() => {
@@ -182,7 +182,7 @@
                     if (tinyvalue) {
 
                         $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
-                        tinyclock
+                        tinyClock
                             .fetch
                             .setCookie('clock24', tinyvalue, csrfToken)
                             .then(() => {
@@ -202,8 +202,8 @@
 
         {# Clock System #}
         <script>
-            setInterval(tinyclock.loop, 500);
-            tinyclock.loop();
+            setInterval(tinyClock.loop, 500);
+            tinyClock.loop();
         </script>
 
     </body>

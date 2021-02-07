@@ -24,9 +24,8 @@ class expressTimezone {
         });
 
         // Convert Number
-        if (typeof this.data.fileMaxAge) {
-            this.data.fileMaxAge = this.data.fileMaxAge / 1000;
-        }
+        if (typeof this.data.fileMaxAge === "string") { this.data.fileMaxAge = Number(this.data.fileMaxAge); }
+        if (typeof this.data.fileMaxAge === "number") { this.data.fileMaxAge = this.data.fileMaxAge / 1000; }
 
         // Complete
         return this;
@@ -70,17 +69,24 @@ class expressTimezone {
         });
 
         // Files
+        const readFile = function (file, req, res, next) {
 
-        // Base
-        this.app.get('/tinyClock/base.js', function (req, res) {
+            // Is String
+            if (typeof file === "string") {
 
-            // Exist Files
-            if (tinyThis.files && typeof tinyThis.files.base === "string") {
-
+                // File Type
                 res.setHeader('Content-Type', 'text/javascript');
-                res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}, s-maxage=${tinyThis.data.fileMaxAge}`);
-                res.setHeader('Content-Length', require('byte-length').byteLength(tinyThis.files.base));
-                res.send(tinyThis.files.base);
+
+                // Cache Control
+                if (typeof tinyThis.data.fileMaxAge === "number") {
+                    res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}, s-maxage=${tinyThis.data.fileMaxAge}`);
+                }
+
+                // File Size
+                res.setHeader('Content-Length', require('byte-length').byteLength(file));
+
+                // Send FIle
+                res.send(file);
 
             }
 
@@ -90,48 +96,21 @@ class expressTimezone {
             // Complete
             return;
 
+        };
+
+        // Base
+        this.app.get('/tinyClock/base.js', function (req, res, next) {
+            return readFile('tinyClock.start = ' + require('./api/clientWeb')(false).base + ';', req, res, next);
         });
 
         // Create UTC
-        this.app.get('/tinyClock/createUTC.js', function (req, res) {
-
-            // Exist Files
-            if (tinyThis.files && typeof tinyThis.files.createUTC === "string") {
-
-                res.setHeader('Content-Type', 'text/javascript');
-                res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}, s-maxage=${tinyThis.data.fileMaxAge}`);
-                res.setHeader('Content-Length', require('byte-length').byteLength(tinyThis.files.createUTC));
-                res.send(tinyThis.files.createUTC);
-
-            }
-
-            // Nope
-            else { next(); }
-
-            // Complete
-            return;
-
+        this.app.get('/tinyClock/createUTC.js', function (req, res, next) {
+            return readFile('tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';', req, res, next);
         });
 
         // Convert UTC
         this.app.get('/tinyClock/convertUTC.js', function (req, res, next) {
-
-            // Exist Files
-            if (tinyThis.files && typeof tinyThis.files.convertUTC === "string") {
-
-                res.setHeader('Content-Type', 'text/javascript');
-                res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}, s-maxage=${tinyThis.data.fileMaxAge}`);
-                res.setHeader('Content-Length', require('byte-length').byteLength(tinyThis.files.convertUTC));
-                res.send(tinyThis.files.convertUTC);
-
-            }
-
-            // Nope
-            else { next(); }
-
-            // Complete
-            return;
-
+            return readFile('tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';', req, res, next);
         });
 
         // Complete

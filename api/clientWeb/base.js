@@ -134,6 +134,6 @@ module.exports = function (data = {
     };
 
     // Complete
-    return tinyClock;
+    return;
 
 };

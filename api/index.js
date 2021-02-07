@@ -43,6 +43,9 @@ class timezone_module {
     // Get Moment Module
     getMoment() { return this.module; }
 
+    // Get File
+    getFile(item) { if (typeof this.files[item] === "string") { return this.files[item]; } else { return ''; } }
+
 };
 
 module.exports = timezone_module;

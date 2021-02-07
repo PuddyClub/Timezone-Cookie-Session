@@ -89,7 +89,7 @@ class expressTimezone {
 
                 // Cache Control
                 if (typeof tinyThis.data.fileMaxAge === "number") {
-                    res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}, s-maxage=${tinyThis.data.fileMaxAge}`);
+                    res.set('Cache-Control', `public, max-age=${tinyThis.data.fileMaxAge}`);
                     res.set('Strict-Transport-Security', `max-age=${tinyThis.data.fileMaxAge / 2}`);
                 }
 

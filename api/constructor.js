@@ -25,7 +25,10 @@ module.exports = function (req, data) {
         utcValue: 'Universal',
 
         // Main Values
-        mainTimezone: 'Universal',
+        mainTimezone: {
+            primary: 'Universal',
+            secondary: 'Universal'
+        },
 
         // Session Vars
         sessionVars: {

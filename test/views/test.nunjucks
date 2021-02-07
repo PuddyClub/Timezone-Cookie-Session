@@ -19,6 +19,8 @@
 
     <body>
 
+        <hr/>
+
         {% if timezone.cfg.actived === timezone.cfgSecondary.actived %}
 
             <div class="mb-2">
@@ -27,6 +29,8 @@
 
             {# Clock #}
             <div class="mb-2" id="primary_clock">??:??</div>
+
+            <hr/>
 
         {% endif %}
 

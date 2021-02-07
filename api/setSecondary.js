@@ -18,7 +18,7 @@ module.exports = function (req) {
 
         if (req.session[this.sessionVars.secondary_timezone] === "auto") {
             this.cfgSecondary.auto = true;
-            this.cfgSecondary.actived = this.main;
+            this.cfgSecondary.actived = this.main.secondary;
         } else {
             this.cfgSecondary.auto = false;
             this.cfgSecondary.actived = req.session[this.sessionVars.secondary_timezone];

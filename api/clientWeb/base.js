@@ -26,7 +26,10 @@ module.exports = function (data = {
         formatDate: data.formatDate,
         formatTime: `{{clockFormat}}`,
         formatTime2: `{{clockFormat2}}`,
-        mainTimezone: `{{mainTimezone}}`,
+        mainTimezone: {
+            primary: `{{mainPrimaryTimezone}}`,
+            secondary: `{{mainSecondaryTimezone}}`
+        },
         utcValue: `{{utcValue}}`,
         newTimezone: moment
             .tz

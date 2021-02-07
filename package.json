@@ -1,6 +1,6 @@
 {
   "name": "@tinypudding/timezone-cookie-session",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Timezone system using the user's cookie-session to adapt all the website's clocks with the user timezone.",
   "main": "index.js",
   "scripts": {

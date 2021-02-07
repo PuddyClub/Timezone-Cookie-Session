@@ -74,39 +74,36 @@ class expressTimezone {
         // Base
         this.app.get('/tinyClock/base.js', function (req, res, next) {
             return readFile(
-                res, next,
-                {
-                    file: 'tinyClock.start = ' + require('./api/clientWeb')(false).base + ';',
-                    date: { year: 2021, month: 2, day: 7, hour: 0, minute: 18 },
-                    timezone: 'America/Sao_Paulo',
-                    fileMaxAge: tinyThis.data.fileMaxAge
-                } 
+                res, next, {
+                file: 'tinyClock.start = ' + require('./api/clientWeb')(false).base + ';',
+                date: { year: 2021, month: 2, day: 7, hour: 0, minute: 18 },
+                timezone: 'America/Sao_Paulo',
+                fileMaxAge: tinyThis.data.fileMaxAge
+            }
             );
         });
 
         // Create UTC
         this.app.get('/tinyClock/createUTC.js', function (req, res, next) {
             return readFile(
-                res, next,
-                {
-                    file: 'tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';',
-                    date: { year: 2021, month: 2, day: 7, hour: 0, minute: 5 },
-                    timezone: 'America/Sao_Paulo',
-                    fileMaxAge: tinyThis.data.fileMaxAge
-                }
+                res, next, {
+                file: 'tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';',
+                date: { year: 2021, month: 2, day: 7, hour: 0, minute: 5 },
+                timezone: 'America/Sao_Paulo',
+                fileMaxAge: tinyThis.data.fileMaxAge
+            }
             );
         });
 
         // Convert UTC
         this.app.get('/tinyClock/convertUTC.js', function (req, res, next) {
             return readFile(
-                res, next,
-                {
-                    file: 'tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';',
-                    date: { year: 2021, month: 2, day: 7, hour: 0, minute: 10 },
-                    timezone: 'America/Sao_Paulo',
-                    fileMaxAge: tinyThis.data.fileMaxAge
-                }
+                res, next, {
+                file: 'tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';',
+                date: { year: 2021, month: 2, day: 7, hour: 0, minute: 10 },
+                timezone: 'America/Sao_Paulo',
+                fileMaxAge: tinyThis.data.fileMaxAge
+            }
             );
         });
 

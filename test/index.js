@@ -97,10 +97,14 @@ app.all('/', bodyParseN, (req, res) => {
         testValue.type = 'valueOf';
         result.valueOf = req.timezone.createUTC(testValue);
 
+        // Convert
+        result.final = req.timezone.convertUTC({
+            utcTime: result.format,
+            timezone: testValue.timezone,
+        });
+
         // Show Results
         console.log(result);
-
-        // Convert
 
     }
 

@@ -69,7 +69,7 @@ class expressTimezone {
         });
 
         // Files
-        const readFile = function (file, date, res, next) {
+        const readFile = function (file, date, timezone, res, next) {
 
             // Is String
             if (typeof file === "string") {
@@ -77,11 +77,14 @@ class expressTimezone {
                 // File Type
                 res.setHeader('Content-Type', 'application/javascript');
                 res.setHeader('Accept-Ranges', 'bytes');
-                res.setHeader('Access-Control-Allow-Origin', 'same');
+                res.setHeader('Access-Control-Allow-Origin', 'same-origin');
                 res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
                 res.setHeader('X-Content-Type-Options', 'nosniff');
-                res.setHeader('Timing-Allow-Origin', 'same');
-                res.setHeader('Last-Modified', require('moment-timezone')(date).toString());
+                res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+                res.setHeader('Timing-Allow-Origin', 'same-origin');
+                res.setHeader('Last-Modified', require('moment-timezone').tz(date, timezone).toString());
+                res.removeHeader('Connection');
+                res.removeHeader('X-Powered-By');
 
                 // Cache Control
                 if (typeof tinyThis.data.fileMaxAge === "number") {
@@ -109,7 +112,7 @@ class expressTimezone {
         this.app.get('/tinyClock/base.js', function (req, res, next) {
             return readFile(
                 'tinyClock.start = ' + require('./api/clientWeb')(false).base + ';',
-                '', res, next
+                { year: 2021, month: 2, day: 7, hour: 0, minute: 18 }, 'America/Sao_Paulo', res, next
             );
         });
 
@@ -117,7 +120,7 @@ class expressTimezone {
         this.app.get('/tinyClock/createUTC.js', function (req, res, next) {
             return readFile(
                 'tinyClock.createUTC_GENERATOR = ' + require('./api/clientWeb')(false).createUTC + ';',
-                '', res, next
+                { year: 2021, month: 2, day: 7, hour: 0, minute: 5 }, 'America/Sao_Paulo', res, next
             );
         });
 
@@ -125,7 +128,7 @@ class expressTimezone {
         this.app.get('/tinyClock/convertUTC.js', function (req, res, next) {
             return readFile(
                 'tinyClock.convertUTC_GENERATOR = ' + require('./api/clientWeb')(false).convertUTC + ';',
-                '', res, next
+                { year: 2021, month: 2, day: 7, hour: 0, minute: 10 }, 'America/Sao_Paulo', res, next
             );
         });
 

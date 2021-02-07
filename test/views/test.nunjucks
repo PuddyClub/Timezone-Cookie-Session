@@ -15,10 +15,7 @@
         <script>
             var tinyclock = {{timezoneTemplate | safe}}({jQuerydivClock: true, useSecondaryTimezone: true});
             var csrfToken = '';
-        </script>
-        <script src="/timezone_cookie_session/convertUTC.js"></script>
-        <script src="/timezone_cookie_session/createUTC.js"></script>
-        
+        </script>   
 
     </head>
 

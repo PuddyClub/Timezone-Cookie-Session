@@ -71,7 +71,7 @@ module.exports = function (data = {
     };
 
     // Compare Clock
-    if (tinyClock.primaryIsAuto === "true") {
+    if (tinyClock.primaryIsAuto === true) {
         if (tinyClock.timezone !== tinyClock.newTimezone) {
 
             // Start Set Auto Timezone
@@ -100,7 +100,7 @@ module.exports = function (data = {
 
     // is 24 Hours
     tinyClock.is24hours = null;
-    if (tinyClock.type24hoursOn === "true") { tinyClock.is24hours = true; } else { tinyClock.is24hours = false; }
+    if (tinyClock.type24hoursOn === true) { tinyClock.is24hours = true; } else { tinyClock.is24hours = false; }
 
     // The Timezone
     tinyClock.loopValues = {

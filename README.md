@@ -11,7 +11,7 @@
 </div>
 
 # Timezone-Cookie-Session
-Codes to help work with Timezone using the moment-timezone module.
+Timezone system using the user's cookie-session to adapt all the website's clocks with the user timezone.
 
 # Information
 This repository is for the use of Tiny Pudding server functionality. The first commit was made to add the repository to the NPM, but soon the README will be updating teaching how to use this module.

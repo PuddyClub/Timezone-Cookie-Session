@@ -46,6 +46,11 @@ module.exports = function (req, data) {
 
     });
 
+    // Fix Main Timezone
+    if (typeof tinyCfg.mainTimezone === "string") {
+        tinyCfg.mainTimezone = { primary: tinyCfg.mainTimezone, secondary: tinyCfg.mainTimezone };
+    }
+
     // Auto List
     this.autoList = tinyCfg.autoList;
 

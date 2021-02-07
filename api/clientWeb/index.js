@@ -14,7 +14,7 @@ module.exports = function () {
     this.files = {};
 
     // Tiny Clock
-    if (typeof baseData['tinyClock.js'] !== "string") { baseData['tinyClock.js'] = require('./base').toString(); }
+    if (typeof baseData['tinyClock.js'] !== "string") { baseData['tinyClock.js'] = require('./tinyClock').toString(); }
     this.files['tinyClock.js'] = baseData['tinyClock.js']
     .replace('{{momentjsLang}}', this.locale)
     .replace('{{setCookieURL}}', this.urls.setCookie)

@@ -80,6 +80,10 @@ app.all('/', bodyParseN, (req, res) => {
         // Post
         result.body = testValue;
 
+        // From Now
+        testValue.type = 'fromNow';
+        result.fromNow = req.timezone.createUTC(testValue);
+
         // Format
         testValue.type = 'format';
         result.format = req.timezone.createUTC(testValue);

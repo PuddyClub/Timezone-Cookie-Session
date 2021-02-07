@@ -28,7 +28,7 @@ module.exports = function (body) {
     try {
 
         // Set New Date
-        const newDate = this.module(new Date(tinyCfg.date + " " + tinyCfg.time));
+        const newDate = this.module.tz(new Date(tinyCfg.date + " " + tinyCfg.time), tinyCfg.timezone);
 
         // Set Values
         dateResult = this.module().tz(tinyCfg.timezone);

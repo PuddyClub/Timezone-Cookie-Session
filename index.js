@@ -76,6 +76,7 @@ class expressTimezone {
 
                 // File Type
                 res.setHeader('Content-Type', 'application/javascript');
+                res.setHeader('Content-MD5', Buffer.from(require('md5')(file)).toString('base64'));
                 res.setHeader('Accept-Ranges', 'bytes');
                 res.setHeader('Access-Control-Allow-Origin', 'same-origin');
                 res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');

@@ -19,21 +19,6 @@ module.exports = function (data = {
     tinyClock.formatDate = data.formatDate;
     tinyClock.newTimezone = moment.tz.guess();
 
-    // Prepare Tiny Clock This
-    const tinyClockThis = {
-
-    };
-
-    // Convert UTC
-    tinyClock.convertUTC = function () {
-        return tinyClock.convertUTC_GENERATOR.apply(tinyClockThis, arguments);
-    }
-
-    // Create UTC
-    tinyClock.createUTC = function () {
-        return CREATEUTC.createUTC_GENERATOR.apply(tinyClockThis, arguments);
-    };
-
     // Set Moment Locale
     moment.locale(tinyClock.locale);
 
@@ -117,6 +102,35 @@ module.exports = function (data = {
     if (tinyClock.timezone) { tinyClock.loopValues.primary.info = tinyClock.timezone.replace(/\_/g, ' ') };
     if (tinyClock.secondary_timezone) { tinyClock.loopValues.primary.info = tinyClock.secondary_timezone.replace(/\_/g, ' '); }
 
+    // Fix Primary
+    if (typeof tinyClock.loopValues.primary.value !== "string") {
+        tinyClock.loopValues.primary.value = tinyClock.newTimezone;
+        tinyClock.loopValues.primary.info = tinyClock.newTimezone.replace(/\_/g, ' ');
+    }
+
+    // Fix Secondary
+    if (typeof tinyClock.loopValues.secondary.value !== "string") {
+        tinyClock.loopValues.secondary.value = tinyClock.newTimezone;
+        tinyClock.loopValues.secondary.info = tinyClock.newTimezone.replace(/\_/g, ' ');
+    }
+
+    // Prepare Tiny Clock This
+    const tinyClockThis = {
+        utcValue: tinyClock.utcValue,
+        module: moment,
+        cfg: { actived: tinyClock.loopValues.primary.value }
+    };
+
+    // Convert UTC
+    tinyClock.convertUTC = function () {
+        return tinyClock.convertUTC_GENERATOR.apply(tinyClockThis, arguments);
+    }
+
+    // Create UTC
+    tinyClock.createUTC = function () {
+        return CREATEUTC.createUTC_GENERATOR.apply(tinyClockThis, arguments);
+    };
+
     // Clock Loop
     tinyClock.clockFormat = tinyClock.formatDate + ', ' + tinyClock.formatTime;
     tinyClock.loop = function () {
@@ -125,18 +139,6 @@ module.exports = function (data = {
         tinyClock.clock = {
             utc: moment.tz(tinyClock.utcValue)
         };
-
-        // Fix Primary
-        if (typeof tinyClock.loopValues.primary.value !== "string") {
-            tinyClock.loopValues.primary.value = tinyClock.newTimezone;
-            tinyClock.loopValues.primary.info = tinyClock.newTimezone.replace(/\_/g, ' ');
-        }
-
-        // Fix Secondary
-        if (typeof tinyClock.loopValues.secondary.value !== "string") {
-            tinyClock.loopValues.secondary.value = tinyClock.newTimezone;
-            tinyClock.loopValues.secondary.info = tinyClock.newTimezone.replace(/\_/g, ' ');
-        }
 
         // Primary Timezone
         tinyClock.clock.timezone = tinyClock.clock.utc.clone().tz(tinyClock.loopValues.primary.value);

@@ -43,12 +43,12 @@ module.exports = function (data = {
 
     // Convert UTC
     tinyclock.convertUTC = function () {
-        return CONVERTUTC.apply(tinyClockThis, arguments);
+        return tinyclock.convertUTC_GENERATOR.apply(tinyClockThis, arguments);
     }
 
     // Create UTC
     tinyclock.createUTC = function () {
-        return CREATEUTC.apply(tinyClockThis, arguments);
+        return tinyclock.createUTC_GENERATOR.apply(tinyClockThis, arguments);
     };
 
     // Set Moment Locale

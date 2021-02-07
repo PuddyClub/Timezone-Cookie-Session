@@ -11,10 +11,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data.js" integrity="sha512-IDSLgD053BknlW9X/ynlGZBcfDdnirlQEutld9AV3u58rKCtnEZqC3xTNnakjBJv18xsRyVPrqAP3WW/kZ9fqQ==" crossorigin="anonymous"></script>
+        
         <script>
             var tinyclock = {{timezoneTemplate | safe}}({jQuerydivClock: true, useSecondaryTimezone: true});
             var csrfToken = '';
         </script>
+        <script src="/timezone_cookie_session/convertUTC.js"></script>
+        <script src="/timezone_cookie_session/createUTC.js"></script>
+        
 
     </head>
 

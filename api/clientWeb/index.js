@@ -19,11 +19,11 @@ module.exports = function (isThis = true) {
         let timezone = '';
         let secondary_timezone = '';
         if(this.cfg.actived){
-            timezone = `tinyClock.timezone = \`${this.cfg.actived}\`,`;
+            timezone = `tinyClock.timezone = \`${this.cfg.actived}\`;`;
         }
 
-        if(this.cfg.cfgSecondary){
-            secondary_timezone = `tinyClock.secondary_timezone = \`${this.cfgSecondary.actived}\`,`;
+        if(this.cfgSecondary){
+            secondary_timezone = `tinyClock.secondary_timezone = \`${this.cfgSecondary.actived}\`;`;
         }
 
         // Return Data

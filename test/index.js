@@ -59,16 +59,44 @@ app.all('/', bodyParseN, (req, res) => {
 
     // Console Result
     console.group(new Date().toString());
-    
+
     // Req
     console.log(req.session);
     console.log(req.timezone);
 
     // Post
-    if(req.method === "POST") {
+    if (req.method === "POST") {
 
-        // Body
-        console.log(req.body);
+        // Result
+        const result = {};
+
+        // Value to Test
+        const testValue = {
+            time: req.body.time,
+            date: req.body.date,
+            timezone: 'America/Sao_Paulo'
+        };
+
+        // Format
+        testValue.type = 'format';
+        result.format = req.timezone.createUTC(testValue);
+
+        // Date
+        testValue.type = 'toDate';
+        result.toDate = req.timezone.createUTC(testValue);
+
+        // String
+        testValue.type = 'toString';
+        result.toString = req.timezone.createUTC(testValue);
+
+        // Value Of
+        testValue.type = 'valueOf';
+        result.valueOf = req.timezone.createUTC(testValue);
+
+        // Show Results
+        console.log(result);
+
+        // Convert
 
     }
 

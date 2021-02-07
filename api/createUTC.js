@@ -4,6 +4,9 @@ module.exports = function (body) {
     const _ = require('lodash');
     const tinyCfg = _.defaultsDeep({}, body, {
 
+        // Format Value
+        formatValue: null,
+
         // Date Value
         date: '',
 
@@ -52,7 +55,7 @@ module.exports = function (body) {
         dateResult.tz(this.utcValue);
 
         // Complete
-        return dateResult.format();
+        if (!tinyCfg.formatValue) { return dateResult.format(); } else { dateResult.format(tinyCfg.formatValue); }
 
     }
 

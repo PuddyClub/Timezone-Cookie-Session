@@ -118,7 +118,9 @@ module.exports = function (data = {
     const tinyClockThis = {
         utcValue: tinyClock.utcValue,
         module: moment,
-        cfg: { actived: tinyClock.loopValues.primary.value }
+        cfg: { actived: tinyClock.loopValues.primary.value },
+        cfgSecondary: { actived: tinyClock.loopValues.secondary.value },
+        clockCfg: { format2: tinyClock.formatTime2 }
     };
 
     // Convert UTC
@@ -128,7 +130,7 @@ module.exports = function (data = {
 
     // Create UTC
     tinyClock.createUTC = function () {
-        return CREATEUTC.createUTC_GENERATOR.apply(tinyClockThis, arguments);
+        return tinyClock.createUTC_GENERATOR.apply(tinyClockThis, arguments);
     };
 
     // Clock Loop

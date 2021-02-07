@@ -31,6 +31,29 @@
             <input type="date" name="date" class="form-control" id="date">
             <input type="time" name="time" class="form-control" id="time">
             <input type="submit" class="btn btn-primary" value="Send"/>
+            <input type="button" class="btn btn-primary" id="tinyTest" value="Test"/>
+
+            <script>
+                $("#tinyTest").click(function () {
+
+                    const tinyResult = tinyClock.createUTC({
+                        date: $('#date').val(),
+                        time: $('#time').val(),
+                        timezone: tinyClock.loopValues.primary.value,
+                        type: 'toString'
+                    });
+
+                    const tinyResult2 = tinyClock.convertUTC({
+                        utcTime: tinyResult,
+                        timezone: tinyClock.loopValues.primary.value,
+                        allowSecondary: true
+                    });
+
+                    console.log(tinyResult);
+                    console.log(tinyResult2);
+
+                });
+            </script>
 
         </form>
 

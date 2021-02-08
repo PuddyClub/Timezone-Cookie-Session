@@ -31,7 +31,7 @@ module.exports = function (data, callback, errCallback) {
 
         // Failed
         if (result.diff > 0) {
-            const err = new Error('You need to wait more!');
+            const err = new Error('You need to wait more time!');
             err.timezone = result;
             reject(err);
         }

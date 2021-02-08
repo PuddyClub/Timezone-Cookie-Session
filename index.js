@@ -18,7 +18,7 @@ class expressTimezone {
 
             // URLs
             urls: {
-                setCookie: '/setCookie'
+                setTime: '/setTime'
             },
 
         });
@@ -57,11 +57,11 @@ class expressTimezone {
         const tinyThis = this;
 
         // Set Cookie
-        this.app.post(this.data.urls.setCookie, async function (req, res) {
+        this.app.post(this.data.urls.setTime, async function (req, res) {
 
             // Send Request
             const csrfToken = await tinyThis.getCsrfToken(req, res);
-            req.timezone.setCookie(req, res, csrfToken);
+            req.timezone.setTime(req, res, csrfToken);
 
             // Complete
             return;

@@ -33,7 +33,7 @@ module.exports = function (isThis = true) {
         
         var tinyClock = {
             urls: {
-                setCookie: \`${this.urls.setCookie}\`
+                setTime: \`${this.urls.setTime}\`
             },
             locale: \`${this.locale}\`,
             formatTime: \`${this.clockCfg.format}\`,

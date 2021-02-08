@@ -12,7 +12,7 @@ module.exports = function (req, data) {
 
         // URLs
         urls: {
-            setCookie: '/setCookie'
+            setTime: '/setTime'
         },
 
         // Clock 24 Hours Default Value

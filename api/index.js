@@ -35,7 +35,7 @@ class timezone_module {
     getUTCValue() { return this.utcValue; }
 
     // Set Cookie
-    setCookie() { return require('./setCookie').apply(this, arguments); }
+    setTime() { return require('./setTime').apply(this, arguments); }
 
      // Execute TIme
      execTime() { return require('./execTime').apply(this, arguments); }   

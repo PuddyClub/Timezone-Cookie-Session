@@ -26,10 +26,10 @@ module.exports = function (data = {
     tinyClock.fetch = {
 
         // Set Cookie
-        setCookie: function (type, value, csrfToken) {
+        setTime: function (type, value, csrfToken) {
             return new Promise(function (resolve, reject) {
 
-                fetch(tinyClock.urls.setCookie, {
+                fetch(tinyClock.urls.setTime, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -62,7 +62,7 @@ module.exports = function (data = {
             // Start Set Auto Timezone
             const setAutoTimezone = function () {
                 return new Promise(function (resolve, reject) {
-                    tinyClock.fetch.setCookie('timezone', tinyClock.newTimezone, data.csrfToken).then(() => {
+                    tinyClock.fetch.setTime('timezone', tinyClock.newTimezone, data.csrfToken).then(() => {
                         resolve();
                         return;
                     }).catch(err => {

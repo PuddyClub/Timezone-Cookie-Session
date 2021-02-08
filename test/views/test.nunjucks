@@ -122,7 +122,7 @@
                             $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
                             tinyClock
                                 .fetch
-                                .setCookie('primary_timezone', tinyvalue, csrfToken)
+                                .setTime('primary_timezone', tinyvalue, csrfToken)
                                 .then(() => {
                                     location.reload();
                                 })
@@ -173,7 +173,7 @@
                             $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
                             tinyClock
                                 .fetch
-                                .setCookie('secondary_timezone', tinyvalue, csrfToken)
+                                .setTime('secondary_timezone', tinyvalue, csrfToken)
                                 .then(() => {
                                     location.reload();
                                 })
@@ -216,7 +216,7 @@
                         $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
                         tinyClock
                             .fetch
-                            .setCookie('clock24', tinyvalue, csrfToken)
+                            .setTime('clock24', tinyvalue, csrfToken)
                             .then(() => {
                                 location.reload();
                             })

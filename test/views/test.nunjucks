@@ -38,21 +38,26 @@
             <script>
                 $("#tinyTest").click(function () {
 
-                    const tinyResult = tinyClock.createUTC({
-                        date: $('#date').val(),
-                        time: $('#time').val(),
-                        timezone: tinyClock.loopValues.primary.value,
-                        type: 'toString'
-                    });
+                    const tinyResult = tinyClock.createUTC({date: $('#date').val(), time: $('#time').val(), timezone: tinyClock.loopValues.primary.value, type: 'toString'});
 
-                    const tinyResult2 = tinyClock.convertUTC({
-                        utcTime: tinyResult,
-                        timezone: tinyClock.loopValues.primary.value,
-                        allowSecondary: true
-                    });
+                    const tinyResult2 = tinyClock.convertUTC({utcTime: tinyResult, timezone: tinyClock.loopValues.primary.value, allowSecondary: true});
 
                     console.log(tinyResult);
                     console.log(tinyResult2);
+
+                });
+                $("#tinyTestFunction").click(function () {
+
+                    const tinyResult = tinyClock.createUTC({date: $('#date').val(), time: $('#time').val(), timezone: tinyClock.loopValues.primary.value, type: 'toString'});
+
+                    tinyClock
+                        .execTime({utcTime: tinyResult, timezone: tinyClock.loopValues.primary.value})
+                        .then((data) => {
+                            console.log('Code time executed!');
+                        })
+                        .catch(err => {
+                            console.log('Code time failed!');
+                        });
 
                 });
             </script>

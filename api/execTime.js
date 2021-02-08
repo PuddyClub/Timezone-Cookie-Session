@@ -30,7 +30,9 @@ module.exports = function (data, callback, errCallback) {
 
         // Failed
         if (result.moment.diff(tinyThis.moment.tz(tinyThis.cfg.actived), 'seconds') > 0) {
-            reject(new Error('You need to wait more!'));
+            const err = new Error('You need to wait more!');
+            err.timezone = result;
+            reject(err);
         }
 
         // Execute

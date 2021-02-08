@@ -36,6 +36,7 @@
             <input type="button" class="btn btn-primary" id="tinyTestFunction" value="Test Function"/>
 
             <script>
+
                 $("#tinyTest").click(function () {
 
                     const tinyResult = tinyClock.createUTC({date: $('#date').val(), time: $('#time').val(), timezone: tinyClock.loopValues.primary.value, type: 'toString'});
@@ -46,6 +47,7 @@
                     console.log(tinyResult2);
 
                 });
+
                 $("#tinyTestFunction").click(function () {
 
                     const tinyResult = tinyClock.createUTC({date: $('#date').val(), time: $('#time').val(), timezone: tinyClock.loopValues.primary.value, type: 'toString'});
@@ -54,9 +56,11 @@
                         .execTime({utcTime: tinyResult, timezone: tinyClock.loopValues.primary.value})
                         .then((data) => {
                             console.log('Code time executed!');
+                            console.log(data);
                         })
                         .catch(err => {
                             console.log('Code time failed!');
+                            console.error(err);
                         });
 
                 });

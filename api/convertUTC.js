@@ -17,7 +17,10 @@ module.exports = function (data) {
         timeFormat: `dddd, MMMM Do YYYY, ${this.clockCfg.format2}`,
 
         // Get Format
-        getFormat: true
+        getFormat: true,
+
+        // Get Original
+        getOriginal: false
 
     });
 
@@ -29,7 +32,7 @@ module.exports = function (data) {
 
     // Convert Clock Data
     result.moment = this.moment.tz(result.vanilla, tinyCfg.timezone);
-    result.original = result.moment.clone();
+    if (tinyCfg.getOriginal) { result.original = result.moment.clone(); }
 
     // Set Timezone
     if (existSecondary) { result.secondary_time = result.moment.clone().tz(this.cfgSecondary.actived); }

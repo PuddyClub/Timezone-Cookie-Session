@@ -7,6 +7,7 @@ module.exports = function (isThis = true) {
     const lodash = `const _ = require('lodash');`;
     if (typeof baseData.convertUTC !== "string") { baseData.convertUTC = require('../convertUTC').toString().replace(lodash, ''); }
     if (typeof baseData.createUTC !== "string") { baseData.createUTC = require('../createUTC').toString().replace(lodash, ''); }
+    if (typeof baseData.execTime !== "string") { baseData.execTime = require('../execTime').toString().replace(lodash, ''); }
     if (typeof baseData.base !== "string") { baseData.base = require('./base').toString(); }
 
     // Exist This

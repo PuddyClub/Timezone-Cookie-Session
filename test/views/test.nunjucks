@@ -16,6 +16,7 @@
         <script src="/tinyClock/base.js"></script>
         <script src="/tinyClock/createUTC.js"></script>
         <script src="/tinyClock/convertUTC.js"></script>
+        <script src="/tinyClock/execTime.js"></script>
 
         <script>
             var csrfToken = '';

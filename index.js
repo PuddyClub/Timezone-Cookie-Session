@@ -107,6 +107,18 @@ class expressTimezone {
             );
         });
 
+            // Exec Time
+            this.app.get('/tinyClock/execTime.js', function (req, res, next) {
+                return readFile(
+                    res, next, {
+                    file: 'tinyClock.execTime_GENERATOR = ' + require('./api/clientWeb')(false).execTime + ';',
+                    date: { year: 2021, month: 2, day: 8, hour: 10, minute: 26 },
+                    timezone: 'America/Sao_Paulo',
+                    fileMaxAge: tinyThis.data.fileMaxAge
+                }
+                );
+            });
+
         // Complete
         return;
 

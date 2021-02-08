@@ -60,6 +60,7 @@
                         })
                         .catch(err => {
                             console.log('Code time failed!');
+                            console.log(err.timezone);
                             console.error(err);
                         });
 

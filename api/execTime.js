@@ -27,9 +27,10 @@ module.exports = function (data, callback, errCallback) {
 
         // Prepare Result
         const result = tinyThis.convertUTC(tinyCfg);
+        result.diff = result.moment.diff(tinyThis.moment.tz(tinyThis.cfg.actived), 'seconds');
 
         // Failed
-        if (result.moment.diff(tinyThis.moment.tz(tinyThis.cfg.actived), 'seconds') > 0) {
+        if (result.diff > 0) {
             const err = new Error('You need to wait more!');
             err.timezone = result;
             reject(err);

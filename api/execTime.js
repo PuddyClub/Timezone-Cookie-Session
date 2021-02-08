@@ -49,6 +49,6 @@ module.exports = function (data, callback, errCallback) {
     }
 
     // Nope
-    else { return new Promise(function (resolve, reject) { imeFunction(resolve, reject); }); }
+    else { return new Promise(function (resolve, reject) { timeFunction(resolve, reject); }); }
 
 };

@@ -133,7 +133,8 @@ module.exports = function (data = {
         return tinyClock.createUTC_GENERATOR.apply(tinyClockThis, arguments);
     };
 
-    // Create UTC
+    // Exec Time
+    tinyClockThis.convertUTC = tinyClock.convertUTC;
     tinyClock.execTime = function () {
         return tinyClock.execTime_GENERATOR.apply(tinyClockThis, arguments);
     };

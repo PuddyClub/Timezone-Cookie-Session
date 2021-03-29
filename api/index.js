@@ -37,8 +37,8 @@ class timezone_module {
     // Set Cookie
     setTime() { return require('./setTime').apply(this, arguments); }
 
-     // Execute TIme
-     execTime() { return require('./execTime').apply(this, arguments); }   
+    // Execute TIme
+    execTime() { return require('./execTime').apply(this, arguments); }
 
     // Get Client Web
     getClientWeb() { return require('./clientWeb').apply(this, arguments); }
